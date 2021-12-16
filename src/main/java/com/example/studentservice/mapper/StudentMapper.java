@@ -9,6 +9,7 @@ import java.util.List;
 public interface StudentMapper {
     List<Student> findAll();
     List<Student> findAllByClassId(Integer classId, String className);
+    Student findByStudent(Student student);
     Student findById(Integer id);
     Integer update(Student student);
     Integer add(Student student);
