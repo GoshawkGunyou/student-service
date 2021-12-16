@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.studentservice.mapper.GradeMapper">
+    <resultMap id="gradeResultWithStudent" type="Grade">
+        <id javaType="int" column="id" property="id" />
+        <result property="language" column="language" javaType="double" />
+        <result property="math" column="math"/>
+        <result property="english" column="english"/>
+        <association property="metaData" javaType="MetaData">
+            <result property="creator" column="creator"/>
+            <result property="creationTime" column="creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            <result property="lastEditor" column="last_editor"/>
+            <result property="lastEdit" column="last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+        </association>
+        <association property="student" javaType="Student">
+            <id javaType="int" column="s_id" property="id" />
+            <result property="serial" column="s_serial" javaType="string"/>
+            <result property="name" column="s_name" javaType="string"/>
+            <result property="sex" column="sex" javaType="Sex"/>
+            <result property="dOB" column="dob" javaType="java.time.LocalDate" typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
+            <result property="address" column="address" javaType="string"/>
+            <result property="phone" column="phone" javaType="string"/>
+            <association property="metaData" javaType="MetaData">
+                <result property="creator" column="s_creator"/>
+                <result property="creationTime" column="s_creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+                <result property="lastEditor" column="s_last_editor"/>
+                <result property="lastEdit" column="s_last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            </association>
+            <association property="classInfo" javaType="ClassInfo">
+                <id javaType="int" property="id" column="c_id" />
+                <result property="serial" column="c_serial" javaType="string"/>
+                <result property="name" column="c_name" javaType="string"/>
+                <result property="status" column="c_status" javaType="ClassStatus"/>
+                <association property="metaData" javaType="MetaData">
+                    <result property="creator" column="c_creator"/>
+                    <result property="creationTime" column="c_creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+                    <result property="lastEditor" column="c_last_editor"/>
+                    <result property="lastEdit" column="c_last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+                </association>
+            </association>
+        </association>
+    </resultMap>
+
+    <resultMap id="gradeResult" type="Grade">
+        <id javaType="int" column="id" property="id" />
+        <result property="language" column="language" javaType="double" />
+        <result property="math" column="math"/>
+        <result property="english" column="english"/>
+        <association property="metaData" javaType="MetaData">
+            <result property="creator" column="creator"/>
+            <result property="creationTime" column="creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            <result property="lastEditor" column="last_editor"/>
+            <result property="lastEdit" column="last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+        </association>
+    </resultMap>
+    
+    <select id="findAll" resultMap="gradeResultWithStudent">
+        SELECT *
+        FROM grades g left outer join
+             (SELECT s.id s_id, s.serial s_serial, s.name s_name, s.sex, s.dob, s.address, s.phone, s.creator s_creator, s.creation_time s_creation_time,
+                     s.last_editor s_last_editor, s.last_time s_last_time, c.id c_id, c.serial c_serial, c.name c_name, c.status c_status, c.creator c_creator,
+                     c.creation_time c_creation_time, c.last_editor c_last_editor, c.last_time c_last_time
+              FROM students s left outer join classes c on s.class_id = c.id) as sc
+             on g.student_id = sc.s_id;
+    </select>
+
+</mapper>
