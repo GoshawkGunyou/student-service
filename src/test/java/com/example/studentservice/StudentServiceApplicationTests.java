@@ -22,7 +22,8 @@ class StudentServiceApplicationTests {
 
     @Test
     void gradeServiceTest() {
-        System.out.println(gradeService.getClassInfo("name", 1));
+        System.out.println(gradeService.getClassInfo(null, 1).getAverages());
+        System.out.println(gradeService.getClassInfo("家哇打叔剧", null));
 
     }
 

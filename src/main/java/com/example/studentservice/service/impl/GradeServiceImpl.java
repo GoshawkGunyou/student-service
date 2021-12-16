@@ -24,10 +24,16 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public GradeClassAverage getClassInfo(String className, Integer classId) {
-        List<Grade> gradeList = gradeMapper.findAll();
-        GradeClassAverage gradeClassAverage = new GradeClassAverage();
-        gradeClassAverage.setGradeList(gradeList);
-        gradeClassAverage.setClassInfo(gradeList.get(0).getStudent().getClassInfo());
-        return gradeClassAverage;
+        ClassInfo classInfo = new ClassInfo();
+        classInfo.setId(classId);
+        classInfo.setName(className);
+        List<Grade> gradeList = gradeMapper.findAllByClassInfo(classInfo);
+        if (gradeList != null) {
+            GradeClassAverage gradeClassAverage = new GradeClassAverage();
+            gradeClassAverage.setGradeList(gradeList);
+            gradeClassAverage.setClassInfo(gradeList.get(0).getStudent().getClassInfo());
+            return gradeClassAverage;
+        }
+        return null;
     }
 }
