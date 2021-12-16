@@ -33,3 +33,28 @@ creation_time
 last_edit
 last_time
 
+Service 业务
+班级编号，班级名称
+调用 根据班级信息学生查询
+收到：所有学生数据 (id, serial, name, sex, dob, address, phone)，班级信息（id, serial, name, status）
+班级编号=班级(serial)，
+班级名称=班级(name)，
+语文平均成绩=做平均，
+数学平均成绩=做平均，
+英语平均成绩=做平均，
+总平均成绩=做加法在做平均（如果学生缺考，该科成绩=NULL，不要计算到学生的平均成绩中）
+
+成绩维护管理部分的查询条件
+学生姓名，班级名称，平均成绩【范围条件，包含开始结束】，班级和姓名实现选择班级级联姓名，
+
+调用 根据班级信息学生查询
+收到：所有学生数据 (id, serial, name, sex, dob, address, phone)，班级信息（id, serial, name, status），成绩
+
+
+学生姓名，学生(name)
+班级，班级（所有）
+科目，if 判断根据条件
+科目成绩，成绩(根据科目）
+
+如果学生缺考，
+则该科成绩=NULL显示为空 
