@@ -1,0 +1,35 @@
+班级
+ID
+serial CL+xxxx+xx+xxx (e.g CL-2021-08-359)
+name
+status
+creator
+creation_time
+last_edit
+last_time
+
+学生信息表
+ID
+serial SN+xxxx+xx+xxxxx (e.g SN-2021-08-00001)
+name
+sex
+dob
+address
+phone
+class_id
+creator
+creation_time
+last_edit
+last_time
+
+学生成绩
+grade_id
+language
+maths
+english
+student_id
+creator
+creation_time
+last_edit
+last_time
+
