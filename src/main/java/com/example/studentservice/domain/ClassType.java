@@ -1,5 +1,5 @@
 package com.example.studentservice.domain;
 
 public enum ClassType {
-    ENGLISH,LANGUAGE,MATHS
+    ENGLISH,LANGUAGE,MATH
 }
