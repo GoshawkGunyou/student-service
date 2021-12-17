@@ -84,4 +84,25 @@
             </if>
         </trim>;
     </select>
+
+    <select id="findByStudentIdAndName" parameterType="Student" resultMap="gradeResultWithStudent">
+        SELECT *
+        FROM grades g left outer join
+        (SELECT s.id s_id, s.serial s_serial, s.name s_name, s.sex, s.dob, s.address, s.phone, s.creator s_creator, s.creation_time s_creation_time,
+        s.last_editor s_last_editor, s.last_time s_last_time, c.id c_id, c.serial c_serial, c.name c_name, c.status c_status, c.creator c_creator,
+        c.creation_time c_creation_time, c.last_editor c_last_editor, c.last_time c_last_time
+        FROM students s left outer join classes c on s.class_id = c.id) as sc
+        on g.student_id = sc.s_id
+        WHERE
+        <trim suffixOverrides="AND">
+            <if test="name!=null">
+                s_name = #{name} AND
+            </if>
+            <if test="id!=null">
+                s_id = #{id} AND
+            </if>
+        </trim>;
+    </select>
+
+
 </mapper>

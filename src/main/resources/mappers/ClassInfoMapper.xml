@@ -15,4 +15,10 @@
             <result property="lastEdit" column="last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
         </association>
     </resultMap>
+
+    <select id="findAll" resultMap="classResult">
+        SELECT * FROM classes;
+    </select>
+
+
 </mapper>

@@ -8,6 +8,7 @@
         <result property="serial" column="serial" javaType="string"/>
         <result property="name" column="name" javaType="string"/>
         <result property="sex" column="sex" javaType="Sex"/>
+        <result property="status" column="status" javaType="StudentStatus"/>
         <result property="dOB" column="dob" javaType="java.time.LocalDate" typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
         <result property="address" column="address" javaType="string"/>
         <result property="phone" column="phone" javaType="string"/>
@@ -30,4 +31,9 @@
             </association>
         </association>
     </resultMap>
+
+    <select id="findAllByClassId" resultMap="studentWithClass">
+        SELECT id, name from students WHERE class_id=#{id};
+    </select>
+
 </mapper>

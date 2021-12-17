@@ -2,8 +2,8 @@ package com.example.studentservice.mapper;
 
 import com.example.studentservice.domain.grade.Grade;
 import com.example.studentservice.domain.schoolclasses.ClassInfo;
+import com.example.studentservice.domain.student.Student;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface GradeMapper {
     List<Grade> findByStudentId(Integer id);
     Grade findByGradeId(Integer id);
     //
-    Grade findByStudentIdAndName(@Param("id") Integer id,@Param("name") String name);
+    Grade findByStudentIdAndName(Student student);
     List<Grade> findAllByClassInfo(ClassInfo classInfo);
     Integer update(Grade grade);
     Integer deleteById(Integer id);
