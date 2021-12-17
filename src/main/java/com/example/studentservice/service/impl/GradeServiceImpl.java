@@ -1,6 +1,9 @@
 package com.example.studentservice.service.impl;
 
+import com.example.studentservice.assembler.GradeAssembler;
+import com.example.studentservice.assembler.StudentAssembler;
 import com.example.studentservice.domain.grade.Grade;
+import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.dto.StudentGradeDTO;
 import com.example.studentservice.mapper.GradeMapper;
 import com.example.studentservice.service.GradeService;
@@ -39,8 +42,15 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public StudentGradeDTO getGradeOf(String name, String classSerial) {
-        return null;
+    public StudentGradeDTO getGradeOf(String name, Double min, Double max) {
+        StudentGradeDTO studentGradeDTO = null;
+        Student student = new Student();
+        student.setName(name);
+        Grade grade = gradeMapper.findByStudentSerialAndName(student);
+        if (grade != null) {
+            studentGradeDTO = GradeAssembler.buildStudentGrade(grade, min, max);
+        }
+        return studentGradeDTO;
     }
 
 

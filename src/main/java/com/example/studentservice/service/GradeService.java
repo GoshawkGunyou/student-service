@@ -15,6 +15,6 @@ public interface GradeService {
 
     Boolean update(Grade grade);
 
-    StudentGradeDTO getGradeOf(String name, String classSerial);
+    StudentGradeDTO getGradeOf(String name, Double min, Double max);
 
 }

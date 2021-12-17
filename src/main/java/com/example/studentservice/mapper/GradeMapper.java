@@ -4,6 +4,7 @@ import com.example.studentservice.domain.grade.Grade;
 import com.example.studentservice.domain.schoolclasses.ClassInfo;
 import com.example.studentservice.domain.student.Student;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
