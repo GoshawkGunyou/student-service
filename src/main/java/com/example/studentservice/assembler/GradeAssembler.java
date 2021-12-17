@@ -23,11 +23,11 @@ public class GradeAssembler {
         List<GradeDTO> gradeDTOS = new ArrayList<>();
         var val = 0.0;
         if ((val = grade.getMath()) > min && val < max)
-            gradeDTOS.add(0, new GradeDTO(ClassType.MATH, val));
+            gradeDTOS.add(new GradeDTO(ClassType.MATH, val));
         if ((val = grade.getEnglish()) > min && val < max)
-            gradeDTOS.add(1, new GradeDTO(ClassType.ENGLISH, grade.getEnglish()));
+            gradeDTOS.add(new GradeDTO(ClassType.ENGLISH, grade.getEnglish()));
         if ((val = grade.getLanguage()) > min && val < max)
-            gradeDTOS.add(2, new GradeDTO(ClassType.LANGUAGE, grade.getLanguage()));
+            gradeDTOS.add(new GradeDTO(ClassType.LANGUAGE, grade.getLanguage()));
         return gradeDTOS;
     }
 }
