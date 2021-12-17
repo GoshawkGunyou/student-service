@@ -4,7 +4,6 @@ import com.example.studentservice.domain.grade.Grade;
 import com.example.studentservice.dto.StudentDTO;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class StudentAssembler {
     public static StudentDTO parse(Grade grade) {
