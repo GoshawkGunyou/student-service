@@ -13,7 +13,7 @@ public interface GradeMapper {
     List<Grade> findByStudentId(Integer id);
     Grade findByGradeId(Integer id);
     //
-    Grade findByStudentIdAndName(Student student);
+    Grade findByStudentSerialAndName(Student student);
     List<Grade> findAllByClassInfo(ClassInfo classInfo);
     Integer update(Grade grade);
     Integer deleteById(Integer id);
