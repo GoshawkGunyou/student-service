@@ -18,6 +18,24 @@ public class GradeClassAverage {
     private List<Grade> gradeList;
     private List<Double> averages;
 
+    public ClassInfo getClassInfo() {
+        if (classInfo == null) {
+            this.classInfo = fetchFirstIfExists();
+        }
+        return this.classInfo;
+    }
+
+    private ClassInfo fetchFirstIfExists() {
+        try {
+            return gradeList.get(0).getStudent().getClassInfo();
+        } catch (NullPointerException e) {
+            return null;
+        }
+    }
+
+    /**
+     * returns a List of Math, English, Language and Total average values in the specific order.
+     */
     public List<Double> getAverages() {
         if (averages == null) {
             doAverage();
@@ -25,6 +43,9 @@ public class GradeClassAverage {
         return this.averages;
     }
 
+    /**
+     * returns a List of Math, English, Language and Total average values in the specific order.
+     */
     private void doAverage() {
         ArrayList<Double> output = new ArrayList<>(4);
         int mathCount = 0;
