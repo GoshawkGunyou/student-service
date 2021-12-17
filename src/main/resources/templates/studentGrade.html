@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{object.name}'s grades'"></title>
+</head>
+<body>
+  <table border="1">
+    <tr>
+      <td th:if="object.math!=null" th:text="#{object.math}"></td>
+    </tr>
+  </table>
+</body>
+</html>
