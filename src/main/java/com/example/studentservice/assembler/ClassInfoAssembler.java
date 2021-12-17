@@ -7,13 +7,13 @@ import com.example.studentservice.dto.ClassInfoDTO;
 import java.util.List;
 
 public class ClassInfoAssembler {
-    public static ClassInfoDTO parse(GradeClassAverage grade) {
+    public static ClassInfoDTO parse(GradeClassAverage gradeClassAverage) {
         // Averages list of Math, English, Language and Total average values in specified order.
-        List<Double> averages = grade.getAverages();
+        List<Double> averages = gradeClassAverage.getAverages();
 
         ClassInfoDTO classInfoDTO = new ClassInfoDTO();
-        classInfoDTO.setClassId(grade.getClassInfo().getId());
-        classInfoDTO.setClassName(grade.getClassInfo().getName());
+        classInfoDTO.setClassId(gradeClassAverage.getClassInfo().getId());
+        classInfoDTO.setClassName(gradeClassAverage.getClassInfo().getName());
         classInfoDTO.setMathAvg(averages.get(0));
         classInfoDTO.setEnglishAvg(averages.get(1));
         classInfoDTO.setLanguageAvg(averages.get(2));

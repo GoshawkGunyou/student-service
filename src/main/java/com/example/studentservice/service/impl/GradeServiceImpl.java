@@ -1,9 +1,12 @@
 package com.example.studentservice.service.impl;
 
+import com.example.studentservice.assembler.ClassInfoAssembler;
 import com.example.studentservice.domain.grade.Grade;
 import com.example.studentservice.domain.grade.GradeClassAverage;
 import com.example.studentservice.domain.schoolclasses.ClassInfo;
 import com.example.studentservice.domain.student.Student;
+import com.example.studentservice.dto.ClassInfoDTO;
+import com.example.studentservice.dto.StudentDTO;
 import com.example.studentservice.mapper.GradeMapper;
 import com.example.studentservice.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +21,32 @@ public class GradeServiceImpl implements GradeService {
     GradeMapper gradeMapper;
 
     @Override
-    public Student getStudentInfo(Student student) {
+    public Boolean insert(Grade grade) {
         return null;
     }
 
     @Override
-    public GradeClassAverage getClassInfo(String className, Integer classId) {
-        ClassInfo classInfo = new ClassInfo();
-        classInfo.setId(classId);
-        classInfo.setName(className);
-        List<Grade> gradeList = gradeMapper.findAllByClassInfo(classInfo);
-        if (gradeList != null) {
-            GradeClassAverage gradeClassAverage = new GradeClassAverage();
-            gradeClassAverage.setGradeList(gradeList);
-            gradeClassAverage.setClassInfo(gradeList.get(0).getStudent().getClassInfo());
-            return gradeClassAverage;
-        }
+    public Boolean insert(Integer studentId, Grade grade) {
         return null;
     }
+
+    @Override
+    public Boolean delete(Integer gradeId) {
+        return null;
+    }
+
+    @Override
+    public Boolean deleteRecords(Integer studentId) {
+        return null;
+    }
+
+    @Override
+    public Boolean update(Grade grade) {
+        return null;
+    }
+
+
+
+
+
 }
