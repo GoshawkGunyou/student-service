@@ -6,15 +6,21 @@ import com.example.studentservice.domain.student.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentResult {
-    ClassType classType;
-    Grade grade;
-
-    public Student getStudent(){
-        return grade.getStudent();
-    }
+@Component
+public class StudentDTO {
+    Integer id;
+    String name;
+    String className;
+    String address;
+    Integer age;
+    Double language;
+    Double maths;
+    Double english;
+    Double total;
+    Double average;
 }
