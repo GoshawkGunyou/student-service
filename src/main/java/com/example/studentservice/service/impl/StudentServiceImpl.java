@@ -7,7 +7,7 @@ import com.example.studentservice.dto.StudentDTO;
 import com.example.studentservice.mapper.GradeMapper;
 import com.example.studentservice.mapper.StudentMapper;
 import com.example.studentservice.service.StudentService;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +15,10 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Mapper
+    @Autowired
     StudentMapper studentMapper;
 
-    @Mapper
+    @Autowired
     GradeMapper gradeMapper;
 
     @Override

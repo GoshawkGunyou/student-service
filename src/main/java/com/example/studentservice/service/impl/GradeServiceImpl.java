@@ -1,6 +1,7 @@
 package com.example.studentservice.service.impl;
 
 import com.example.studentservice.domain.grade.Grade;
+import com.example.studentservice.dto.StudentGradeDTO;
 import com.example.studentservice.mapper.GradeMapper;
 import com.example.studentservice.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,10 @@ public class GradeServiceImpl implements GradeService {
         return null;
     }
 
-
+    @Override
+    public StudentGradeDTO getGradeOf(String name, String classSerial) {
+        return null;
+    }
 
 
 }
