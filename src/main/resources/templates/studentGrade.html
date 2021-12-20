@@ -2,13 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{object.name}'s grades'"></title>
+    <title th:text="#{studentGradeDTO.studentName}'s grades'"></title>
 </head>
 <body>
   <table border="1">
-    <tr>
-      <td th:if="object.math!=null" th:text="#{object.math}"></td>
-    </tr>
+      <tr>
+          名字： <td th:text="${studentGradeDTO.studentName}"></td>
+      </tr>
+      <tr>
+          班级： <td th:text="${studentGradeDTO.className}"></td>
+      </tr>
+      <tr th:each="grade : *studentGradeDTO.gradeDTOs">
+          <td th:text="${grade.classType}"></td>
+          <td th:text="${grade.grade}"></td>
+      </tr>
   </table>
 </body>
 </html>

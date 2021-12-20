@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Grade check</title>
+</head>
+<body>
+<div id="test"></div>
+  <form>
+      Min <input name="min" id="min" required/>
+      Max <input name="max" id="max" required/>
+    <select name="classes" id="classes">
+        <option th:each="class : *{classInfos}" th:id="${class.id}" th:text="${class.name}" onclick="loadStudents(id)"></option>
+    </select>
+    <select name="students" id="students">
+
+    </select>
+  </form>
+<div id="result"></div>
+</body>
+<script type="text/javascript">
+    function loadStudents(id) {
+        let xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.onreadystatechange=function () {
+            if (xmlHttpRequest.readyState===4 && xmlHttpRequest.status===200) {
+                let students = JSON.parse(xmlHttpRequest.responseText);
+                let output = '';
+                for (var i = 0; i < students.length; i++) {
+                    var student = students[i]
+                    output += '<option id="' + student.id + '" onclick="getInfo(' + student.name + ')">' + student.name + '</option>';
+                }
+                document.getElementById("students").innerHTML=output;
+            }
+        }
+        xmlHttpRequest.open("POST", "http://localhost:8888/display/loadStudents", true);
+        xmlHttpRequest.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+        xmlHttpRequest.send(id);
+    }
+
+    function getInfo(name) {
+        let query = {"max":document.getElementById("max"), "min": document.getElementById("min"), "studentName":name}
+        let xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.onreadystatechange=function () {
+            if (xmlHttpRequest.readyState===4 && xmlHttpRequest.status===200) {
+                document.getElementById("result").innerHTML=xmlHttpRequest.responseText;
+            }
+        }
+        xmlHttpRequest.open("POST", "http://localhost:8888/display/grade", true)
+        xmlHttpRequest.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+        xmlHttpRequest.send(JSON.stringify(query));
+    }
+</script>
+
+</html>

@@ -2,6 +2,7 @@ package com.example.studentservice.service.impl;
 
 import com.example.studentservice.assembler.StudentAssembler;
 import com.example.studentservice.domain.grade.Grade;
+import com.example.studentservice.domain.schoolclasses.ClassInfo;
 import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.dto.StudentDTO;
 import com.example.studentservice.mapper.GradeMapper;
@@ -23,7 +24,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> findInClass(Integer classId) {
-        return null;
+        System.out.println(studentMapper.findAllByClassId(classId));
+        return studentMapper.findAllByClassId(classId);
     }
 
     @Override
