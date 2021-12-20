@@ -86,7 +86,7 @@
     </select>
 
     <select id="findByStudentSerialAndName" parameterType="Student" resultMap="gradeResultWithStudent">
-        SELECT *
+        SELECT s_id, AVG(math) as math, AVG(english) as english, AVG(language) as language, s_serial, s_name, sex, dob, address, phone, s_creator, s_creation_time, s_last_editor, s_last_time, c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time
         FROM grades g left outer join
         (SELECT s.id s_id, s.serial s_serial, s.name s_name, s.sex, s.dob, s.address, s.phone, s.creator s_creator, s.creation_time s_creation_time,
         s.last_editor s_last_editor, s.last_time s_last_time, c.id c_id, c.serial c_serial, c.name c_name, c.status c_status, c.creator c_creator,
@@ -101,7 +101,8 @@
             <if test="id!=null">
                 s_serial = #{serial} AND
             </if>
-        </trim>;
+        </trim>
+        group by s_id;
     </select>
 
     <select id="findOneWithLimits" resultMap="gradeResultWithStudent">

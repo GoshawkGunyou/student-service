@@ -44,6 +44,7 @@ class StudentServiceApplicationTests {
     @Test
     void studentGradeDTOLimits() {
         System.out.println(gradeService.getGradeOf("zfl", 60.0, 100.0));
+        System.out.println(gradeService.getGradeOf("zfl", 20.0, 50.0));
     }
 
 }
