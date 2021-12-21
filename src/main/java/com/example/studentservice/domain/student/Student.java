@@ -17,6 +17,7 @@ public class Student {
     private LocalDate dOB;
     private String address;
     private String phone;
+    private StudentStatus status;
     private ClassInfo classInfo;
     private MetaData metaData;
 }

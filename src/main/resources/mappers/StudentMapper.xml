@@ -8,6 +8,7 @@
         <result property="serial" column="serial" javaType="string"/>
         <result property="name" column="name" javaType="string"/>
         <result property="sex" column="sex" javaType="Sex"/>
+        <result property="status" column="status" javaType="StudentStatus"/>
         <result property="dOB" column="dob" javaType="java.time.LocalDate" typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
         <result property="address" column="address" javaType="string"/>
         <result property="phone" column="phone" javaType="string"/>
@@ -30,4 +31,26 @@
             </association>
         </association>
     </resultMap>
+
+    <resultMap id="student" type="Student">
+        <id javaType="int" column="id" property="id" />
+        <result property="serial" column="serial" javaType="string"/>
+        <result property="name" column="name" javaType="string"/>
+        <result property="sex" column="sex" javaType="Sex"/>
+        <result property="status" column="status" javaType="StudentStatus"/>
+        <result property="dOB" column="dob" javaType="java.time.LocalDate" typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
+        <result property="address" column="address" javaType="string"/>
+        <result property="phone" column="phone" javaType="string"/>
+        <association property="metaData" javaType="MetaData">
+            <result property="creator" column="creator"/>
+            <result property="creationTime" column="creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            <result property="lastEditor" column="last_editor"/>
+            <result property="lastEdit" column="last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+        </association>
+    </resultMap>
+
+    <select id="findAllByClassId" resultMap="student">
+        SELECT id, name from students WHERE class_id=#{id};
+    </select>
+
 </mapper>
