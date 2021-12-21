@@ -58,7 +58,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
         ClassInfoDTO classInfoDTO = null;
         ClassInfo classInfo = new ClassInfo();
         classInfo.setId(classId);
-        classInfo.setName(className);
+        classInfo.setName(className.strip());
         List<Grade> gradeList = gradeMapper.findAllByClassInfo(classInfo);
 
         if (gradeList != null && gradeList.size() > 0) {
