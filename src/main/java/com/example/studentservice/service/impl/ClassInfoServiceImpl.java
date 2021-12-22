@@ -50,14 +50,17 @@ public class ClassInfoServiceImpl implements ClassInfoService {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setName(name);
         classInfo.setSerial(serial);
-        return classInfoMapper.findByNameOrSerial(classInfo);
+        return classInfoMapper.findById(classInfo);
     }
 
     @Override
     public ClassInfoDTO getClassInfo(String className, Integer classId) {
-        ClassInfoDTO classInfoDTO = null;
+        ClassInfoDTO classInfoDTO;
         ClassInfo classInfo = new ClassInfo();
         classInfo.setId(classId);
+        if (className != null) {
+            className = className.strip();
+        }
         classInfo.setName(className);
         List<Grade> gradeList = gradeMapper.findAllByClassInfo(classInfo);
 
@@ -66,6 +69,8 @@ public class ClassInfoServiceImpl implements ClassInfoService {
             gradeClassAverage.setGradeList(gradeList);
             gradeClassAverage.setClassInfo(gradeList.get(0).getStudent().getClassInfo());
             classInfoDTO = ClassInfoAssembler.parse(gradeClassAverage);
+        } else {
+            classInfoDTO = ClassInfoAssembler.parse(classInfoMapper.findById(classInfo));
         }
         return classInfoDTO;
     }

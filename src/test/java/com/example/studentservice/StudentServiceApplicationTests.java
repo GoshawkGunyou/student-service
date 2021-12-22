@@ -33,7 +33,6 @@ class StudentServiceApplicationTests {
         System.out.println(classInfoService.getClassInfo(null, 1));
         System.out.println(classInfoService.getClassInfo("家哇打叔剧", null));
         System.out.println(classInfoService.getClassInfo(null, 4));
-
     }
 
     @Test

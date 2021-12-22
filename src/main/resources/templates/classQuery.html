@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Class Query</title>
+</head>
+<body>
+<form action="/display/class" method="post">
+  <table border="1">
+    <tr>
+      <td><select name="classVar" id="classVar">
+        <option th:each="class : *{classes}" th:value="${class.id}" th:text="${class.name}">
+      </select></td>
+      <td><input type="submit" value="submit"></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

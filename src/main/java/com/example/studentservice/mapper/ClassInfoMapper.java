@@ -8,6 +8,6 @@ import java.util.List;
 @Mapper
 public interface ClassInfoMapper {
     List<ClassInfo> findAll();
-    ClassInfo findByNameOrSerial(ClassInfo classInfo);
+    ClassInfo findById(ClassInfo classInfo);
 
 }
