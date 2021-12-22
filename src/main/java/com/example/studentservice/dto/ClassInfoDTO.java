@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 public class ClassInfoDTO {
-    Integer classId;
+    String classSerial;
     String className;
     Double languageAvg;
     Double mathAvg;

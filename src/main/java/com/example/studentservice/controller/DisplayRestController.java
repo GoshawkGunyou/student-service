@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("display")
 public class DisplayRestController {
     @Autowired
     GradeService gradeService;
@@ -23,7 +24,7 @@ public class DisplayRestController {
     @Autowired
     ClassInfoService classInfoService;
 
-    @RequestMapping("/display/grade")
+    @RequestMapping("/grade")
     @ResponseBody
     @CrossOrigin
     public StudentGradeDTO toGrade(@RequestBody Query q) {
@@ -31,7 +32,7 @@ public class DisplayRestController {
         return gradeService.getGradeOf(q.getStudentName(), q.getMin(), q.getMax());
     }
 
-    @RequestMapping("/display/loadStudents")
+    @RequestMapping("/loadStudents")
     @ResponseBody
     @CrossOrigin
     public List<Student> students(@RequestBody Integer classId) {

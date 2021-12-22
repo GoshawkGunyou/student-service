@@ -20,17 +20,9 @@
         SELECT * FROM classes;
     </select>
 
-    <select id="findByNameOrSerial" resultMap="classResult" parameterType="ClassInfo">
+    <select id="findById" resultMap="classResult" parameterType="ClassInfo">
         SELECT * FROM classes
-        WHERE
-        <trim suffixOverrides="AND">
-            <if test="name!=null">
-                name = #{name} AND
-            </if>
-            <if test="serial!=null">
-                serial = #{serial} AND
-            </if>
-        </trim>;
+        WHERE id = #{id};
     </select>
 
 

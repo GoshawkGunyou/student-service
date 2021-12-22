@@ -7,14 +7,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("display")
 public class DisplayController {
 
     @Autowired
     ClassInfoService classInfoService;
 
-    @RequestMapping("/display/class")
-    public String displayClass(Integer id, Model model) {
-        model.addAttribute("classes", classInfoService.getClassInfo(null, id));
-        return "";
+    @RequestMapping("/class")
+    public String displayClass(Integer classVar, Model model) {
+        System.out.println(classVar);
+        model.addAttribute("classInfo", classInfoService.getClassInfo(null, classVar));
+        return "classInfo";
     }
 }

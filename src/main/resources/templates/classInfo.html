@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Class Information</title>
+</head>
+<body>
+<table border="1">
+  <tr>
+    <td>班级编号</td>
+    <td>班级名称</td>
+    <td>语文平均成绩</td>
+    <td>数学平均成绩</td>
+    <td>英语平均成绩</td>
+    <td>总平均成绩</td>
+  </tr>
+  <tr th:if="classInfo!=null">
+    <td th:text="${classInfo.getClassSerial()}"></td>
+    <td th:text="${classInfo.getClassName()}"></td>
+    <td th:text="${classInfo.getLanguageAvg()}"></td>
+    <td th:text="${classInfo.getMathAvg()}"></td>
+    <td th:text="${classInfo.getEnglishAvg()}"></td>
+    <td th:text="${classInfo.getTotalAvg()}"></td>
+  </tr>
+</table>
+
+<a href="/display/query/class">return</a>
+</body>
+</html>
