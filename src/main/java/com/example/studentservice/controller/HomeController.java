@@ -44,7 +44,6 @@ public class HomeController {
 
     @RequestMapping("display/student/grade")
     public String toGrade(Model model, GradeQuery gradeQuery) {
-        System.out.println(gradeQuery);
         model.addAttribute("studentGradeDTO", gradeService.getGradeOf(gradeQuery.getStudentName(), gradeQuery.getMin(), gradeQuery.getMax()));
         return "studentGrade";
     }

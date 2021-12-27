@@ -27,7 +27,6 @@ public class DisplayRestController {
     @ResponseBody
     @CrossOrigin
     public StudentGradeDTO toGrade(@RequestBody GradeQuery q) {
-        System.out.println("looking or grade of: " + q.getStudentName());
         return gradeService.getGradeOf(q.getStudentName(), q.getMin(), q.getMax());
     }
 
@@ -35,7 +34,6 @@ public class DisplayRestController {
     @ResponseBody
     @CrossOrigin
     public List<Student> students(@RequestBody Integer classId) {
-        System.out.println("attempt to find: " + classId);
         return studentService.findInClass(classId);
     }
 }
