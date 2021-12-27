@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="test"></div>
-  <form action="/display/student" method="post">
+  <form action="/display/student/grade" method="post">
       Min <input name="min" id="min" required/>
       Max <input name="max" id="max" required/>
     <select name="classes" id="classes">
@@ -28,7 +28,7 @@
                 let output = '';
                 for (var i = 0; i < students.length; i++) {
                     var student = students[i]
-                    output += '<option value="' + student.name + '" id="' + student.id + '" onclick="getInfo(' + student.name + ')">' + student.name + '</option>';
+                    output += '<option name="studentName" value="' + student.name + '" id="' + student.id + '" onclick="getInfo(' + student.name + ')">' + student.name + '</option>';
                 }
                 document.getElementById("students").innerHTML=output;
             }

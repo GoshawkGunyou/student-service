@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+  <table>
+    <tr>
+      <td>编号</td><td th:text="studentInfo.serial"></td>
+      <td>姓名</td><td th:text="studentInfo.name"></td>
+      <td><a th:href="@{/class(className=${studentInfo.className})}">班级</a>></td><td th:text="studentInfo.className"></td>
+      <td>住址</td><td th:text="studentInfo.address"></td>
+      <td>年龄</td><td th:text="studentInfo.age"></td>
+      <td>语文</td><td th:text="studentInfo.language"></td>
+      <td>数学</td><td th:text="studentInfo.math"></td>
+      <td>英语</td><td th:text="studentInfo.english"></td>
+      <td>总成绩</td><td th:text="studentInfo.total"></td>
+      <td>平均成绩</td><td th:text="studentInfo.average"></td>
+    </tr>
+  </table>
+</body>
+</html>

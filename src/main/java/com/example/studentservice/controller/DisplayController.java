@@ -14,9 +14,9 @@ public class DisplayController {
     ClassInfoService classInfoService;
 
     @RequestMapping("/class")
-    public String displayClass(Integer classVar, Model model) {
+    public String displayClass(Integer classVar, String className, Model model) {
         System.out.println(classVar);
-        model.addAttribute("classInfo", classInfoService.getClassInfo(null, classVar));
+        model.addAttribute("classInfo", classInfoService.getClassInfo(className, classVar));
         return "classInfo";
     }
 }

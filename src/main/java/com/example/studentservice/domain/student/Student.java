@@ -20,4 +20,17 @@ public class Student {
     private StudentStatus status;
     private ClassInfo classInfo;
     private MetaData metaData;
+
+    public String getSerial() {
+        return "SN-" + this.serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
+    public void setSerial(Integer id) {
+        LocalDate now = LocalDate.now();
+        this.serial = String.format(now.getMonth().getValue() > 9 ? "%d-%d-%d" : "%d-0%d-%d", now.getYear(), now.getMonth().getValue());
+    }
 }
