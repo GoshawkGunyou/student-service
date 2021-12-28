@@ -53,4 +53,21 @@
         SELECT id, name from students WHERE class_id=#{id};
     </select>
 
+    <select id="findByStudent" resultMap="student" parameterType="Student">
+        SELECT id, serial, name, sex, dob, address, phone, class_id, creator, creation_time, last_editor, last_time
+        FROM students
+        WHERE
+        <trim suffix="AND" suffixOverrides="">
+            <if test="serial!=null">
+                serial=#{serial} AND
+            </if>
+            <if test="name!=null">
+                name=#{name} AND
+            </if>
+            <if test="id!=null">
+                id=#{id} AND
+            </if>
+        </trim>
+    </select>
+
 </mapper>

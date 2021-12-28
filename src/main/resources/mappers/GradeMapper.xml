@@ -87,7 +87,11 @@
         </trim>;
     </select>
 
-    <select id="findByStudentSerialAndName" parameterType="Student" resultMap="gradeResultWithStudent">
+    <select id="findByStudentSerialAndName" parameterType="com.example.studentservice.domain.student.Student" resultMap="gradeResult">
+       SELECT id, student_id, language, math, english, creator, creation_time, last_editor, last_time FROM grades WHERE student_id = #{id};
+    </select>
+
+    <select id="findByStudentSerialAndNamev1" parameterType="Student" resultMap="gradeResultWithStudent">
         SELECT s_id, AVG(math) as math, AVG(english) as english, AVG(language) as language, s_serial, s_name, sex, dob, address, phone, s_creator, s_creation_time, s_last_editor, s_last_time, c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time
         FROM grades g left outer join
         (SELECT s.id s_id, s.serial s_serial, s.name s_name, s.sex, s.dob, s.address, s.phone, s.creator s_creator, s.creation_time s_creation_time,

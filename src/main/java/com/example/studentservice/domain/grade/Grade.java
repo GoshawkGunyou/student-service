@@ -17,28 +17,4 @@ public class Grade {
     private MetaData metaData;
     private int count;
     private Double total;
-
-    public Double getAverage() {
-        return getTotal() / count;
-    }
-
-    public Double getTotal() {
-        if (this.total != null)
-            return this.total;
-        double sum = 0.0;
-        count = 0;
-        if (language!=null) {
-            sum += language;
-            count++;
-        }
-        if (math!=null) {
-            sum += math;
-            count++;
-        }
-        if (english!=null) {
-            sum += english;
-            count++;
-        }
-        return this.total = sum;
-    }
 }
