@@ -44,9 +44,13 @@ public class StudentServiceImpl implements StudentService {
         Student student = new Student();
         student.setName("".equals(name) ? null : name);
         student.setSerial("".equals(serial) ? null : serial);
+        student = studentMapper.findByStudent(student);
+        if (student == null)
+            return null;
+        ClassInfo classInfo = student.getClassInfo();
         Grade grade = gradeMapper.findByStudentSerialAndName(student);
         if (grade != null) {
-            studentDTO = StudentAssembler.parse(grade);
+            studentDTO = StudentAssembler.parse(grade, student, classInfo);
         }
         return studentDTO;
     }

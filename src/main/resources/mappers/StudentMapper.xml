@@ -53,9 +53,9 @@
         SELECT id, name from students WHERE class_id=#{id};
     </select>
 
-    <select id="findByStudent" resultMap="student" parameterType="Student">
-        SELECT id, serial, name, sex, dob, address, phone, class_id, creator, creation_time, last_editor, last_time
-        FROM students
+    <select id="findByStudent" resultMap="studentWithClass" parameterType="Student">
+        SELECT id, serial, name, sex, dob, address, phone, creator, creation_time, last_editor, last_time
+        FROM students left outer join classes c on students.class_id = c.id
         WHERE
         <trim suffix="AND" suffixOverrides="">
             <if test="serial!=null">

@@ -1,19 +1,21 @@
 package com.example.studentservice.assembler;
 
 import com.example.studentservice.domain.grade.Grade;
+import com.example.studentservice.domain.schoolclasses.ClassInfo;
+import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.dto.StudentDTO;
 
 import java.time.LocalDate;
 
 public class StudentAssembler {
-    public static StudentDTO parse(Grade grade) {
+    public static StudentDTO parse(Grade grade, Student student, ClassInfo classInfo) {
         StudentDTO studentDTO = new StudentDTO();
-        studentDTO.setSerial(grade.getStudent().getSerial());
-        studentDTO.setName(grade.getStudent().getName());
-        studentDTO.setClassName(grade.getStudent().getClassInfo().getName());
-        studentDTO.setAddress(grade.getStudent().getAddress());
+        studentDTO.setSerial(student.getSerial());
+        studentDTO.setName(student.getName());
+        studentDTO.setClassName(classInfo.getName());
+        studentDTO.setAddress(student.getAddress());
         // Age = difference of D.O.B to now
-        studentDTO.setAge(LocalDate.now().getYear() - grade.getStudent().getDOB().getYear());
+        studentDTO.setAge(LocalDate.now().getYear() - student.getDOB().getYear());
         studentDTO.setEnglish(grade.getEnglish());
         studentDTO.setMaths(grade.getMath());
         studentDTO.setLanguage(grade.getLanguage());
