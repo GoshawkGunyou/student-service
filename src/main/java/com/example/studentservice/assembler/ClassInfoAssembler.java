@@ -8,7 +8,7 @@ import com.example.studentservice.dto.ClassInfoDTO;
 import java.util.List;
 
 public class ClassInfoAssembler {
-    public static ClassInfoDTO parse(GradeClassAverage gradeClassAverage) {
+    public static ClassInfoDTO create(GradeClassAverage gradeClassAverage) {
         // Averages list of Math, English, Language and Total average values in specified order.
         List<Double> averages = gradeClassAverage.getAverages();
 

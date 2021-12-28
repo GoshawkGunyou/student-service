@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GradeAssembler {
-    public static StudentGradeDTO buildStudentGrade(Grade grade, Double min, Double max) {
+    public static StudentGradeDTO create(Grade grade, Double min, Double max) {
         String studentName = grade.getStudent().getName();
         String className = grade.getStudent().getClassInfo().getName();
         StudentGradeDTO studentGradeDTO = new StudentGradeDTO();

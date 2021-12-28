@@ -50,7 +50,7 @@ public class GradeServiceImpl implements GradeService {
         student.setName(name);
         Grade grade = gradeMapper.findByStudentSerialAndName(student);
         if (grade != null) {
-            studentGradeDTO = GradeAssembler.buildStudentGrade(grade, min, max);
+            studentGradeDTO = GradeAssembler.create(grade, min, max);
         }
         return studentGradeDTO;
     }
