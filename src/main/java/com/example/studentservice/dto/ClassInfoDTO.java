@@ -14,4 +14,8 @@ public class ClassInfoDTO {
     Double mathAvg;
     Double englishAvg;
     Double totalAvg;
+
+    public void setClassSerial(String classSerial) {
+        this.classSerial = "CL-" + classSerial;
+    }
 }

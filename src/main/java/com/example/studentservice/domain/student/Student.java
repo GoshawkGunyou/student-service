@@ -31,6 +31,17 @@ public class Student {
 
     public void setSerial(Integer id) {
         LocalDate now = LocalDate.now();
-        this.serial = String.format(now.getMonth().getValue() > 9 ? "%d-%d-%d" : "%d-0%d-%d", now.getYear(), now.getMonth().getValue(), id);
+        String month = now.getMonth().getValue() > 9 ? "" + now.getMonthValue() : "0" + now.getMonthValue();
+        String stringId = String.valueOf(id);
+        if (id < 10)
+            stringId = "0000" + stringId;
+        else if (id < 100)
+            stringId = "000" + stringId;
+        else if (id < 1000)
+            stringId = "00" + stringId;
+        else if (id < 10000)
+            stringId = "0" + stringId;
+        this.serial = String.format("%d-%s-%s", now.getYear(), month, stringId);
+
     }
 }

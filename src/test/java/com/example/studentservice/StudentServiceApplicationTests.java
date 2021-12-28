@@ -8,9 +8,16 @@ import com.example.studentservice.mapper.StudentMapper;
 import com.example.studentservice.service.ClassInfoService;
 import com.example.studentservice.service.GradeService;
 import com.example.studentservice.service.StudentService;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionManager;
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @SpringBootTest
 class StudentServiceApplicationTests {
@@ -44,6 +51,9 @@ class StudentServiceApplicationTests {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setId(1);
         System.out.println(classInfoMapper.findBy(classInfo));
+        classInfo.setId(null);
+        classInfo.setSerial("2021-08-001");
+        System.out.println(classInfoMapper.findBy(classInfo));
     }
 
     @Test
@@ -51,12 +61,6 @@ class StudentServiceApplicationTests {
         gradeMapper.findAllByClassId(1).forEach(System.out::println);
     }
 
-    @Test
-    void classInfoServiceTest() {
-        System.out.println(classInfoService.getClassInfo(null, "2021-08-001"));
-        System.out.println(classInfoService.getClassInfo("家哇打叔剧", null));
-        System.out.println(classInfoService.getClassInfo(null, "2021-08-002"));
-    }
 
     @Test
     void studentMapperTest() {
@@ -70,6 +74,13 @@ class StudentServiceApplicationTests {
     }
 
     @Test
+    void classInfoServiceTest() {
+        System.out.println(classInfoService.getClassInfo(null, "2021-08-001"));
+        System.out.println(classInfoService.getClassInfo("家哇打叔剧", null));
+        System.out.println(classInfoService.getClassInfo(null, "2021-08-002"));
+    }
+
+    @Test
     void studentDTOTest() {
         System.out.println(studentService.getInfo(null,"zfl"));
     }
@@ -78,6 +89,19 @@ class StudentServiceApplicationTests {
     void studentGradeDTOLimits() {
         System.out.println(gradeService.getGradeOf("zfl", 60.0, 100.0));
         System.out.println(gradeService.getGradeOf("zfl", 20.0, 50.0));
+    }
+
+    @Test
+    void populate() {
+        Student student = studentMapper.findById(4);
+        student.setId(null);
+        ClassInfo classInfo = new ClassInfo();
+        classInfo.setId(2);
+        student.setClassInfo(classInfo);
+        for (int i = 5; i < 1000; i++) {
+            student.setSerial(i);
+            studentMapper.add(student);
+        }
     }
 
 }

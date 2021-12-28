@@ -16,6 +16,10 @@
         </association>
     </resultMap>
 
+    <select id="findLast" resultType="int">
+        SELECT c_serial FROM classes ORDER BY c_id DESC LIMIT 1;
+    </select>
+
     <select id="findAll" resultMap="classResult">
         SELECT c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time FROM classes;
     </select>

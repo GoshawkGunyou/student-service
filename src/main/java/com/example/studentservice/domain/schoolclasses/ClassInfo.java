@@ -4,6 +4,8 @@ import com.example.studentservice.domain.MetaData;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Data
 @Component
 @AllArgsConstructor
@@ -14,10 +16,18 @@ public class ClassInfo {
     private String name;
     private MetaData metaData;
 
-    public String getSerial() {
-        if (this.serial == null) {
-            return null;
-        }
-        return "CL-" + serial;
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
+    public void setSerial(Integer id) {
+        LocalDate now = LocalDate.now();
+        String stringId = String.valueOf(id);
+        if (id < 10)
+            stringId = "00" + stringId;
+        else if (id < 100)
+            stringId = "0" + stringId;
+        String month = now.getMonth().getValue() > 9 ? "" + now.getMonthValue() : "0" + now.getMonthValue();
+        this.serial = now.getYear() + "-" + month + "-" + stringId;
     }
 }
