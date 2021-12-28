@@ -4,25 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.studentservice.mapper.GradeMapper">
     <resultMap id="gradeResultWithStudent" type="Grade">
-        <id javaType="int" column="id" property="id" />
-        <result property="language" column="language" javaType="double" />
-        <result property="math" column="math"/>
-        <result property="english" column="english"/>
+        <id javaType="int" property="id" column="g_id" />
+        <result property="language" column="g_language" javaType="double" />
+        <result property="math" column="g_math"/>
+        <result property="english" column="g_english"/>
         <association property="metaData" javaType="MetaData">
-            <result property="status" column="status"/>
-            <result property="creator" column="creator"/>
-            <result property="creationTime" column="creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
-            <result property="lastEditor" column="last_editor"/>
-            <result property="lastEdit" column="last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            <result property="status" column="g_status"/>
+            <result property="creator" column="g_creator"/>
+            <result property="creationTime" column="g_creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            <result property="lastEditor" column="g_last_editor"/>
+            <result property="lastEdit" column="g_last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
         </association>
         <association property="student" javaType="Student">
-            <id javaType="int" column="s_id" property="id" />
+            <id javaType="int" property="id" column="s_id" />
             <result property="serial" column="s_serial" javaType="string"/>
             <result property="name" column="s_name" javaType="string"/>
-            <result property="sex" column="sex" javaType="Sex"/>
-            <result property="dOB" column="dob" javaType="java.time.LocalDate" typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
-            <result property="address" column="address" javaType="string"/>
-            <result property="phone" column="phone" javaType="string"/>
+            <result property="sex" column="s_sex" javaType="Sex"/>
+            <result property="dOB" column="s_dob" javaType="java.time.LocalDate" typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
+            <result property="address" column="s_address" javaType="string"/>
+            <result property="phone" column="s_phone" javaType="string"/>
             <association property="metaData" javaType="MetaData">
                 <result property="status" column="s_status"/>
                 <result property="creator" column="s_creator"/>

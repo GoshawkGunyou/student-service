@@ -4,48 +4,48 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.studentservice.mapper.StudentMapper">
     <resultMap id="studentWithClass" type="Student">
-        <id javaType="int" column="id" property="id" />
-        <result property="serial" column="serial" javaType="string"/>
-        <result property="name" column="name" javaType="string"/>
-        <result property="sex" column="sex" javaType="Sex"/>
-        <result property="status" column="status" javaType="StudentStatus"/>
-        <result property="dOB" column="dob" javaType="java.time.LocalDate" typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
-        <result property="address" column="address" javaType="string"/>
-        <result property="phone" column="phone" javaType="string"/>
+        <id javaType="int" property="id" column="s_id" />
+        <result property="serial" column="s_serial" javaType="string"/>
+        <result property="name" column="s_name" javaType="string"/>
+        <result property="sex" column="s_sex" javaType="Sex"/>
+        <result property="dOB" column="s_dob" javaType="java.time.LocalDate" typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
+        <result property="address" column="s_address" javaType="string"/>
+        <result property="phone" column="s_phone" javaType="string"/>
         <association property="metaData" javaType="MetaData">
-            <result property="creator" column="creator"/>
-            <result property="creationTime" column="creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
-            <result property="lastEditor" column="last_editor"/>
-            <result property="lastEdit" column="last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            <result property="status" column="s_status"/>
+            <result property="creator" column="s_creator"/>
+            <result property="creationTime" column="s_creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            <result property="lastEditor" column="s_last_editor"/>
+            <result property="lastEdit" column="s_last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
         </association>
         <association property="classInfo" javaType="ClassInfo">
-            <id javaType="int" column="id" property="id" />
-            <result property="serial" column="serial" javaType="string"/>
-            <result property="name" column="name" javaType="string"/>
-            <result property="status" column="status" javaType="ClassStatus"/>
+            <id javaType="int" property="id" column="c_id"/>
+            <result property="serial" column="c_serial" javaType="string"/>
+            <result property="name" column="c_name" javaType="string"/>
             <association property="metaData" javaType="MetaData">
-                <result property="creator" column="creator"/>
-                <result property="creationTime" column="creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
-                <result property="lastEditor" column="last_editor"/>
-                <result property="lastEdit" column="last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+                <result property="status" column="c_status"/>
+                <result property="creator" column="c_creator"/>
+                <result property="creationTime" column="c_creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+                <result property="lastEditor" column="c_last_editor"/>
+                <result property="lastEdit" column="c_last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
             </association>
         </association>
     </resultMap>
 
     <resultMap id="student" type="Student">
-        <id javaType="int" column="id" property="id" />
-        <result property="serial" column="serial" javaType="string"/>
-        <result property="name" column="name" javaType="string"/>
-        <result property="sex" column="sex" javaType="Sex"/>
-        <result property="status" column="status" javaType="StudentStatus"/>
-        <result property="dOB" column="dob" javaType="java.time.LocalDate" typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
-        <result property="address" column="address" javaType="string"/>
-        <result property="phone" column="phone" javaType="string"/>
+        <id javaType="int" property="id" column="s_id" />
+        <result property="serial" column="s_serial" javaType="string"/>
+        <result property="name" column="s_name" javaType="string"/>
+        <result property="sex" column="s_sex" javaType="Sex"/>
+        <result property="dOB" column="s_dob" javaType="java.time.LocalDate" typeHandler="org.apache.ibatis.type.LocalDateTypeHandler"/>
+        <result property="address" column="s_address" javaType="string"/>
+        <result property="phone" column="s_phone" javaType="string"/>
         <association property="metaData" javaType="MetaData">
-            <result property="creator" column="creator"/>
-            <result property="creationTime" column="creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
-            <result property="lastEditor" column="last_editor"/>
-            <result property="lastEdit" column="last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            <result property="status" column="s_status"/>
+            <result property="creator" column="s_creator"/>
+            <result property="creationTime" column="s_creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            <result property="lastEditor" column="s_last_editor"/>
+            <result property="lastEdit" column="s_last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
         </association>
     </resultMap>
 
