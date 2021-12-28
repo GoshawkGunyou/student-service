@@ -54,18 +54,18 @@
     </select>
 
     <select id="findByStudent" resultMap="studentWithClass" parameterType="Student">
-        SELECT id, serial, name, sex, dob, address, phone, creator, creation_time, last_editor, last_time
-        FROM students left outer join classes c on students.class_id = c.id
+        SELECT s_id, s_serial, s_name, s_sex, s_dob, s_address, s_phone, s_status, s_creator, s_creation_time, s_last_editor, s_last_time, c.c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time
+        FROM students s left outer join classes c on s.c_id = c.c_id
         WHERE
-        <trim suffix="AND" suffixOverrides="">
+        <trim suffix="" suffixOverrides="AND">
             <if test="serial!=null">
-                serial=#{serial} AND
+                s_serial=#{serial} AND
             </if>
             <if test="name!=null">
-                name=#{name} AND
+                s_name=#{name} AND
             </if>
             <if test="id!=null">
-                id=#{id} AND
+                s_id=#{id} AND
             </if>
         </trim>
     </select>

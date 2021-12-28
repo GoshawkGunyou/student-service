@@ -1,8 +1,10 @@
 package com.example.studentservice;
 
 import com.example.studentservice.domain.schoolclasses.ClassInfo;
+import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.mapper.ClassInfoMapper;
 import com.example.studentservice.mapper.GradeMapper;
+import com.example.studentservice.mapper.StudentMapper;
 import com.example.studentservice.service.ClassInfoService;
 import com.example.studentservice.service.GradeService;
 import com.example.studentservice.service.StudentService;
@@ -18,6 +20,9 @@ class StudentServiceApplicationTests {
 
     @Autowired
     GradeMapper gradeMapper;
+
+    @Autowired
+    StudentMapper studentMapper;
 
     @Autowired
     GradeService gradeService;
@@ -51,6 +56,17 @@ class StudentServiceApplicationTests {
         System.out.println(classInfoService.getClassInfo(null, "2021-08-001"));
         System.out.println(classInfoService.getClassInfo("家哇打叔剧", null));
         System.out.println(classInfoService.getClassInfo(null, "2021-08-002"));
+    }
+
+    @Test
+    void studentMapperTest() {
+        Student student = new Student();
+        student.setName("xxx");
+        System.out.println(studentMapper.findByStudent(student));
+        Student student1 = new Student();
+        student1.setSerial("2021-08-00003");
+        System.out.println(student1);
+        System.out.println(studentMapper.findByStudent(student1));
     }
 
     @Test

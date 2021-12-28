@@ -21,8 +21,8 @@ public class Student {
     private ClassInfo classInfo;
     private MetaData metaData;
 
-    public String getSerial() {
-        return "SN-" + this.serial;
+    public String printSerial() {
+        return this.serial != null ? "SN-" + this.serial : null;
     }
 
     public void setSerial(String serial) {
@@ -31,6 +31,6 @@ public class Student {
 
     public void setSerial(Integer id) {
         LocalDate now = LocalDate.now();
-        this.serial = String.format(now.getMonth().getValue() > 9 ? "%d-%d-%d" : "%d-0%d-%d", now.getYear(), now.getMonth().getValue());
+        this.serial = String.format(now.getMonth().getValue() > 9 ? "%d-%d-%d" : "%d-0%d-%d", now.getYear(), now.getMonth().getValue(), id);
     }
 }
