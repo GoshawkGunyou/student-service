@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class StudentAssembler {
     public static StudentDTO parse(Grade grade) {
         StudentDTO studentDTO = new StudentDTO();
-        studentDTO.setId(grade.getStudent().getId());
+        studentDTO.setSerial(grade.getStudent().getSerial());
         studentDTO.setName(grade.getStudent().getName());
         studentDTO.setClassName(grade.getStudent().getClassInfo().getName());
         studentDTO.setAddress(grade.getStudent().getAddress());

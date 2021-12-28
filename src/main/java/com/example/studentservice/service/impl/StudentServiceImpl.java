@@ -42,8 +42,8 @@ public class StudentServiceImpl implements StudentService {
     public StudentDTO getInfo(String serial, String name) {
         StudentDTO studentDTO = null;
         Student student = new Student();
-        student.setName(name);
-        student.setSerial(serial);
+        student.setName("".equals(name) ? null : name);
+        student.setSerial("".equals(serial) ? null : serial);
         Grade grade = gradeMapper.findByStudentSerialAndName(student);
         if (grade != null) {
             studentDTO = StudentAssembler.parse(grade);

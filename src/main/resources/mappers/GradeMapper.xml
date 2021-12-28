@@ -99,7 +99,7 @@
                 s_name = #{name} AND
             </if>
             <if test="id!=null">
-                s_serial = #{serial} AND
+                s_id = #{id} AND
             </if>
         </trim>
         group by s_id;

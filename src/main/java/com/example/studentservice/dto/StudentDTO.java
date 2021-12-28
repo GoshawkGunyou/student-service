@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Component
 public class StudentDTO {
-    Integer id;
+    String serial;
     String name;
     String className;
     String address;
