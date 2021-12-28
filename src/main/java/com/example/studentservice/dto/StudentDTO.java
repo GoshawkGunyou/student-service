@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,9 +18,5 @@ public class StudentDTO {
     String className;
     String address;
     Integer age;
-    Double language;
-    Double maths;
-    Double english;
-    Double total;
-    Double average;
+    List<ScoresDTO> scores;
 }

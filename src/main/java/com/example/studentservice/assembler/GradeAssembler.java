@@ -2,7 +2,7 @@ package com.example.studentservice.assembler;
 
 import com.example.studentservice.domain.ClassType;
 import com.example.studentservice.domain.grade.Grade;
-import com.example.studentservice.dto.GradeDTO;
+import com.example.studentservice.dto.ClassScoreDTO;
 import com.example.studentservice.dto.StudentGradeDTO;
 
 import java.util.ArrayList;
@@ -19,15 +19,15 @@ public class GradeAssembler {
         return studentGradeDTO;
     }
 
-    private static List<GradeDTO> buildGradeDTO(Grade grade, Double min, Double max) {
-        List<GradeDTO> gradeDTOS = new ArrayList<>();
+    private static List<ClassScoreDTO> buildGradeDTO(Grade grade, Double min, Double max) {
+        List<ClassScoreDTO> classScores = new ArrayList<>();
         var val = 0.0;
         if (grade.getMath() != null && (val = grade.getMath()) >= min && val <= max)
-            gradeDTOS.add(new GradeDTO(ClassType.MATH, val));
+            classScores.add(new ClassScoreDTO(ClassType.MATH, val));
         if (grade.getEnglish() != null && (val = grade.getEnglish()) >= min && val <= max)
-            gradeDTOS.add(new GradeDTO(ClassType.ENGLISH, grade.getEnglish()));
+            classScores.add(new ClassScoreDTO(ClassType.ENGLISH, grade.getEnglish()));
         if (grade.getLanguage() != null && (val = grade.getLanguage()) >= min && val <= max)
-            gradeDTOS.add(new GradeDTO(ClassType.LANGUAGE, grade.getLanguage()));
-        return gradeDTOS;
+            classScores.add(new ClassScoreDTO(ClassType.LANGUAGE, grade.getLanguage()));
+        return classScores;
     }
 }

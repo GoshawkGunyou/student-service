@@ -49,8 +49,8 @@ public class StudentServiceImpl implements StudentService {
             return null;
         ClassInfo classInfo = student.getClassInfo();
         Grade grade = gradeMapper.findByStudentSerialAndName(student);
-        if (grade != null) {
-            studentDTO = StudentAssembler.parse(grade, student, classInfo);
+        List<Grade> grades = gradeMapper.findByStudentId(student.getId());
+        if (grade != null && grades != null) {
         }
         return studentDTO;
     }

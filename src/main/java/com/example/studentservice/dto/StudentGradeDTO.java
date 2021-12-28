@@ -1,6 +1,5 @@
 package com.example.studentservice.dto;
 
-import com.example.studentservice.domain.ClassType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,5 +14,5 @@ import java.util.List;
 public class StudentGradeDTO {
     String studentName;
     String className;
-    List<GradeDTO> gradeDTOs;
+    List<ClassScoreDTO> gradeDTOs;
 }
