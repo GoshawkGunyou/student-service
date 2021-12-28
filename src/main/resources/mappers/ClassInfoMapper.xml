@@ -17,13 +17,13 @@
     </resultMap>
 
     <select id="findAll" resultMap="classResult">
-        SELECT * FROM classes;
+        SELECT c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time FROM classes;
     </select>
 
     <select id="findBy" resultMap="classResult" parameterType="ClassInfo">
-        SELECT * FROM classes
+        SELECT c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time FROM classes
         WHERE
-        <trim suffixOverrides="AND">
+        <trim suffix="" suffixOverrides="AND">
             <if test="serial!=null">
                 c_serial = #{serial} AND
             </if>

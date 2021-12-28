@@ -15,6 +15,4 @@ public class Grade {
     private Double math;
     private Double english;
     private MetaData metaData;
-    private int count;
-    private Double total;
 }

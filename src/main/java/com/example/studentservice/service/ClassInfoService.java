@@ -14,6 +14,6 @@ public interface ClassInfoService {
     List<ClassInfo> findClasses();
     ClassInfo findClass(String name, String serial);
 
-    ClassInfoDTO getClassInfo(String className, Integer classId);
+    ClassInfoDTO getClassInfo(String className, String classSerial);
 
 }

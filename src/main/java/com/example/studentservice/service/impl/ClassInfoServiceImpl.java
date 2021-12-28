@@ -2,7 +2,6 @@ package com.example.studentservice.service.impl;
 
 import com.example.studentservice.assembler.ClassInfoAssembler;
 import com.example.studentservice.domain.grade.Grade;
-import com.example.studentservice.domain.grade.GradeClassAverage;
 import com.example.studentservice.domain.schoolclasses.ClassInfo;
 import com.example.studentservice.dto.ClassInfoDTO;
 import com.example.studentservice.mapper.ClassInfoMapper;
@@ -54,24 +53,19 @@ public class ClassInfoServiceImpl implements ClassInfoService {
     }
 
     @Override
-    public ClassInfoDTO getClassInfo(String className, Integer classId) {
-        ClassInfoDTO classInfoDTO;
+    public ClassInfoDTO getClassInfo(String className, String classSerial) {
+        ClassInfoDTO classInfoDTO = null;
         ClassInfo classInfo = new ClassInfo();
-        classInfo.setId(classId);
-        if (className != null) {
+        if (className != null)
             className = className.strip();
-        }
+        if (classSerial != null)
+            classSerial = classSerial.strip();
+        classInfo.setSerial(classSerial);
         classInfo.setName(className);
         classInfo = classInfoMapper.findBy(classInfo);
-        List<Grade> gradeList = gradeMapper.findAllByClassInfo(classInfo);
-
-        if (gradeList != null && gradeList.size() > 0) {
-            GradeClassAverage gradeClassAverage = new GradeClassAverage();
-            gradeClassAverage.setGradeList(gradeList);
-            gradeClassAverage.setClassInfo(gradeList.get(0).getStudent().getClassInfo());
-            classInfoDTO = ClassInfoAssembler.create(gradeClassAverage);
-        } else {
-            classInfoDTO = ClassInfoAssembler.parse(classInfoMapper.findBy(classInfo));
+        if (classInfo != null) {
+            List<Grade> gradeList = gradeMapper.findAllByClassId(classInfo.getId());
+            classInfoDTO = ClassInfoAssembler.create(gradeList, classInfo);
         }
         return classInfoDTO;
     }

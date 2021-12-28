@@ -13,4 +13,11 @@ public class ClassInfo {
     private String serial;
     private String name;
     private MetaData metaData;
+
+    public String getSerial() {
+        if (this.serial == null) {
+            return null;
+        }
+        return "CL-" + serial;
+    }
 }

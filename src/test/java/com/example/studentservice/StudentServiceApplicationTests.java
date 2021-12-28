@@ -1,5 +1,7 @@
 package com.example.studentservice;
 
+import com.example.studentservice.domain.schoolclasses.ClassInfo;
+import com.example.studentservice.mapper.ClassInfoMapper;
 import com.example.studentservice.mapper.GradeMapper;
 import com.example.studentservice.service.ClassInfoService;
 import com.example.studentservice.service.GradeService;
@@ -10,6 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class StudentServiceApplicationTests {
+
+    @Autowired
+    ClassInfoMapper classInfoMapper;
 
     @Autowired
     GradeMapper gradeMapper;
@@ -29,10 +34,23 @@ class StudentServiceApplicationTests {
     }
 
     @Test
+    void classInfoMapperTest() {
+//        classInfoMapper.findAll().forEach(System.out::println);
+        ClassInfo classInfo = new ClassInfo();
+        classInfo.setId(1);
+        System.out.println(classInfoMapper.findBy(classInfo));
+    }
+
+    @Test
+    void gradeMapperTest() {
+        gradeMapper.findAllByClassId(1).forEach(System.out::println);
+    }
+
+    @Test
     void classInfoServiceTest() {
-        System.out.println(classInfoService.getClassInfo(null, 1));
+        System.out.println(classInfoService.getClassInfo(null, "2021-08-001"));
         System.out.println(classInfoService.getClassInfo("家哇打叔剧", null));
-        System.out.println(classInfoService.getClassInfo(null, 4));
+        System.out.println(classInfoService.getClassInfo(null, "2021-08-002"));
     }
 
     @Test
