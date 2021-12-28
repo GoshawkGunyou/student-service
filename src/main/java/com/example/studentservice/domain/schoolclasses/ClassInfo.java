@@ -12,6 +12,5 @@ public class ClassInfo {
     private Integer id;
     private String serial;
     private String name;
-    private ClassStatus status;
     private MetaData metaData;
 }

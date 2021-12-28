@@ -9,6 +9,7 @@
         <result property="math" column="math"/>
         <result property="english" column="english"/>
         <association property="metaData" javaType="MetaData">
+            <result property="status" column="status"/>
             <result property="creator" column="creator"/>
             <result property="creationTime" column="creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
             <result property="lastEditor" column="last_editor"/>
@@ -23,6 +24,7 @@
             <result property="address" column="address" javaType="string"/>
             <result property="phone" column="phone" javaType="string"/>
             <association property="metaData" javaType="MetaData">
+                <result property="status" column="s_status"/>
                 <result property="creator" column="s_creator"/>
                 <result property="creationTime" column="s_creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
                 <result property="lastEditor" column="s_last_editor"/>
@@ -32,8 +34,8 @@
                 <id javaType="int" property="id" column="c_id" />
                 <result property="serial" column="c_serial" javaType="string"/>
                 <result property="name" column="c_name" javaType="string"/>
-                <result property="status" column="c_status" javaType="ClassStatus"/>
                 <association property="metaData" javaType="MetaData">
+                    <result property="status" column="c_status"/>
                     <result property="creator" column="c_creator"/>
                     <result property="creationTime" column="c_creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
                     <result property="lastEditor" column="c_last_editor"/>
