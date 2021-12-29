@@ -54,7 +54,7 @@
     </select>
 
     <select id="findAllByClassId" resultMap="student">
-        SELECT id, name from students WHERE class_id=#{id};
+        SELECT s_id, s_name from students WHERE c_id=#{id};
     </select>
 
     <select id="findById" resultMap="student" parameterType="int">

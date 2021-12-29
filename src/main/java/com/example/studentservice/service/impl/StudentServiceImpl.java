@@ -24,7 +24,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> findInClass(Integer classId) {
-        System.out.println(studentMapper.findAllByClassId(classId));
         return studentMapper.findAllByClassId(classId);
     }
 
@@ -67,9 +66,10 @@ public class StudentServiceImpl implements StudentService {
         if (student == null)
             return null;
         ClassInfo classInfo = student.getClassInfo();
-        Grade grade = gradeMapper.findByStudentSerialAndName(student);
+//        Grade grade = gradeMapper.findByStudentSerialAndName(student);
         List<Grade> grades = gradeMapper.findByStudentId(student.getId());
-        if (grade != null && grades != null) {
+        if (grades != null) {
+            studentDTO = StudentAssembler.create(grades, student, classInfo);
         }
         return studentDTO;
     }
