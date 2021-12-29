@@ -92,6 +92,13 @@ class StudentServiceApplicationTests {
     }
 
     @Test
+    void findLast() {
+        String last = studentMapper.findLast();
+        System.out.println(last);
+    }
+
+
+    @Test
     void populate() {
         Student student = studentMapper.findById(4);
         student.setId(null);

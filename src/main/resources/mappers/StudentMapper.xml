@@ -49,6 +49,10 @@
         </association>
     </resultMap>
 
+    <select id="findLast" resultType="string">
+        SELECT s_serial FROM students ORDER BY s_id DESC LIMIT 1;
+    </select>
+
     <select id="findAllByClassId" resultMap="student">
         SELECT id, name from students WHERE class_id=#{id};
     </select>

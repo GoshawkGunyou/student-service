@@ -15,4 +15,5 @@ public interface StudentMapper {
     Integer update(Student student);
     Integer add(Student student);
     Integer deleteById(Integer id);
+    String findLast();
 }

@@ -1,5 +1,6 @@
 package com.example.studentservice.domain.student;
 
+import com.example.studentservice.assembler.StudentAssembler;
 import com.example.studentservice.domain.MetaData;
 import com.example.studentservice.domain.schoolclasses.ClassInfo;
 import lombok.Data;
@@ -32,16 +33,9 @@ public class Student {
     public void setSerial(Integer id) {
         LocalDate now = LocalDate.now();
         String month = now.getMonth().getValue() > 9 ? "" + now.getMonthValue() : "0" + now.getMonthValue();
-        String stringId = String.valueOf(id);
-        if (id < 10)
-            stringId = "0000" + stringId;
-        else if (id < 100)
-            stringId = "000" + stringId;
-        else if (id < 1000)
-            stringId = "00" + stringId;
-        else if (id < 10000)
-            stringId = "0" + stringId;
+        String stringId = StudentAssembler.parseSerial(id);
         this.serial = String.format("%d-%s-%s", now.getYear(), month, stringId);
-
     }
+
+
 }

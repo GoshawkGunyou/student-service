@@ -19,16 +19,22 @@ public class StudentAssembler {
         studentDTO.setAddress(student.getAddress());
         // Age = difference of D.O.B to now
         studentDTO.setAge(LocalDate.now().getYear() - student.getDOB().getYear());
-        studentDTO.setScores(parse(gradeList));
+        studentDTO.setScores(parseGrades(gradeList));
         return studentDTO;
     }
 
-    private static List<ScoresDTO> parse(List<Grade> grades) {
+    private static List<ScoresDTO> parseGrades(List<Grade> grades) {
         List<ScoresDTO> scoresList = new ArrayList<>();
-        grades.forEach(grade -> {
-            scoresList.add(new ScoresDTO(grade.getLanguage(), grade.getMath(), grade.getEnglish()));
-        });
+        grades.forEach(grade -> scoresList.add(new ScoresDTO(grade.getLanguage(), grade.getMath(), grade.getEnglish())));
         return scoresList;
+    }
+
+    public static String parseSerial(Integer id) {
+        if (id < 10) return "0000" + id;
+        if (id < 100) return "000" + id;
+        if (id < 1000) return "00" + id;
+        if (id < 10000) return "0" + id;
+        return id + "";
     }
 
 

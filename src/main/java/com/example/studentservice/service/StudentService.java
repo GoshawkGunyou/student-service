@@ -8,6 +8,7 @@ import java.util.List;
 public interface StudentService {
     List<Student> findInClass(Integer classId);
     List<Student> findInClass(String className);
+    Integer insert(Student student);
 
     Student findById(Integer id);
     StudentDTO getInfo(String serial, String name);

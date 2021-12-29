@@ -16,7 +16,7 @@
         </association>
     </resultMap>
 
-    <select id="findLast" resultType="int">
+    <select id="findLast" resultType="string">
         SELECT c_serial FROM classes ORDER BY c_id DESC LIMIT 1;
     </select>
 

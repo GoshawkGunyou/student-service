@@ -33,6 +33,25 @@ public class StudentServiceImpl implements StudentService {
         return null;
     }
 
+
+
+    @Override
+    public Integer insert(Student student) {
+        // find last insereted student and find serial based on that + 1
+        student.setSerial(parseSerial(studentMapper.findLast()));
+        return studentMapper.add(student);
+    }
+
+    /**
+     *
+     * @param serial studentSerial to parse into int
+     * @return int representation of serial
+     */
+    private Integer parseSerial(String serial) {
+        return Integer.parseInt(serial.substring(serial.length() - 5));
+    }
+
+
     @Override
     public Student findById(Integer id) {
         return null;
