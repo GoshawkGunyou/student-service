@@ -23,8 +23,8 @@ public class DisplayController {
     GradeService gradeService;
 
     @RequestMapping("/class")
-    public String displayClass(String classSerial, String className, Model model) {
-        model.addAttribute("classInfo", classInfoService.getClassInfo(className, classSerial));
+    public String displayClass(String classVar, Model model) {
+        model.addAttribute("classInfo", classInfoService.getClassInfo(classVar, null));
         return "classInfo";
     }
 
