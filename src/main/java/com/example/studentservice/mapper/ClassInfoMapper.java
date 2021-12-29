@@ -9,5 +9,6 @@ import java.util.List;
 public interface ClassInfoMapper {
     List<ClassInfo> findAll();
     ClassInfo findBy(ClassInfo classInfo);
+    String findLast();
 
 }

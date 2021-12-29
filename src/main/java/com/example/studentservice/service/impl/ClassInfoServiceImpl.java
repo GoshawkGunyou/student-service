@@ -21,7 +21,13 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 
     @Override
     public Boolean insert(ClassInfo classInfo) {
+
+        classInfo.setSerial(parseSerial(classInfoMapper.findLast()) + 1);
         return null;
+    }
+
+    private Integer parseSerial(String serial) {
+        return Integer.parseInt(serial.substring(serial.length() - 3));
     }
 
     @Override

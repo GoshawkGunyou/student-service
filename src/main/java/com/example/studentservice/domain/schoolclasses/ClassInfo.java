@@ -1,5 +1,6 @@
 package com.example.studentservice.domain.schoolclasses;
 
+import com.example.studentservice.assembler.ClassInfoAssembler;
 import com.example.studentservice.domain.MetaData;
 import lombok.*;
 import org.springframework.stereotype.Component;
@@ -22,11 +23,7 @@ public class ClassInfo {
 
     public void setSerial(Integer id) {
         LocalDate now = LocalDate.now();
-        String stringId = String.valueOf(id);
-        if (id < 10)
-            stringId = "00" + stringId;
-        else if (id < 100)
-            stringId = "0" + stringId;
+        String stringId = ClassInfoAssembler.parseIntToSer(id);
         String month = now.getMonth().getValue() > 9 ? "" + now.getMonthValue() : "0" + now.getMonthValue();
         this.serial = now.getYear() + "-" + month + "-" + stringId;
     }

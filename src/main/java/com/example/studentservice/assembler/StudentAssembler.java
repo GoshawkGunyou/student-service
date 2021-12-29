@@ -29,7 +29,7 @@ public class StudentAssembler {
         return scoresList;
     }
 
-    public static String parseSerial(Integer id) {
+    public static String parseIntToSer(Integer id) {
         if (id < 10) return "0000" + id;
         if (id < 100) return "000" + id;
         if (id < 1000) return "00" + id;
