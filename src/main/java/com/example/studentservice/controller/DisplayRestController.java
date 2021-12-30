@@ -39,13 +39,13 @@ public class DisplayRestController {
 
     @RequestMapping("/student")
     @CrossOrigin
-    public StudentDTO findStudent(String studentName, String studentSerial) {
+    public StudentDTO findStudent(@RequestBody String studentName, @RequestBody String studentSerial) {
         return studentService.getInfo(studentSerial, studentName);
     }
 
     @RequestMapping("/classInfo")
     @CrossOrigin
-    public ClassInfoDTO findClassInfo(String className, String classSerial) {
+    public ClassInfoDTO findClassInfo(@RequestBody String className, @RequestBody String classSerial) {
         return classInfoService.getClassInfo(className, classSerial);
     }
 

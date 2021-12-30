@@ -99,24 +99,22 @@
        SELECT g_id, g_language, g_math, g_english, g_status, g_creator, g_creation_time, g_last_editor, g_last_time FROM grades WHERE s_id = #{id};
     </select>
 
-<!--    <select id="findByStudentSerialAndNamev1" parameterType="Student" resultMap="gradeResultWithStudent">-->
-<!--        SELECT s_id, AVG(math) as math, AVG(english) as english, AVG(language) as language, s_serial, s_name, sex, dob, address, phone, s_creator, s_creation_time, s_last_editor, s_last_time, c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time-->
-<!--        FROM grades g left outer join-->
-<!--        (SELECT s.id s_id, s.serial s_serial, s.name s_name, s.sex, s.dob, s.address, s.phone, s.creator s_creator, s.creation_time s_creation_time,-->
-<!--        s.last_editor s_last_editor, s.last_time s_last_time, c.id c_id, c.serial c_serial, c.name c_name, c.status c_status, c.creator c_creator,-->
-<!--        c.creation_time c_creation_time, c.last_editor c_last_editor, c.last_time c_last_time-->
-<!--        FROM students s left outer join classes c on s.class_id = c.id) as sc-->
-<!--        on g.student_id = sc.s_id-->
-<!--        WHERE-->
-<!--        <trim suffixOverrides="AND">-->
-<!--            <if test="name!=null">-->
-<!--                s_name = #{name} AND-->
-<!--            </if>-->
-<!--            <if test="id!=null">-->
-<!--                s_id = #{id} AND-->
-<!--            </if>-->
-<!--        </trim>-->
-<!--        group by s_id;-->
-<!--    </select>-->
-<!--    -->
+    <select id="findByStudentSerialAndName" parameterType="Student" resultMap="gradeResultWithStudent">
+        SELECT g.s_id, AVG(g_math) as g_math, AVG(g_english) as g_english, AVG(g_language) as g_language, s_serial, s_name, s_sex, s_dob, s_address, s_phone, s_creator, s_creation_time, s_last_editor, s_last_time, c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time
+        FROM grades g left outer join
+        (SELECT s_id, s_serial, s_name, s_sex, s_dob, s_address, s_phone, s_status, s_creator, s_creation_time, s_last_editor, s_last_time, c.c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time
+        FROM students s left outer join classes c on s.c_id = c.c_id) as sc
+        on g.s_id = sc.s_id
+        WHERE
+        <trim suffixOverrides="AND">
+            <if test="name!=null">
+                s_name = #{name} AND
+            </if>
+            <if test="id!=null">
+                sc.s_id = #{id} AND
+            </if>
+        </trim>
+        group by s_id;
+    </select>
+
 </mapper>
