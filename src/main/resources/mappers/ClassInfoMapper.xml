@@ -24,7 +24,7 @@
         SELECT c_serial FROM classes ORDER BY c_id DESC LIMIT 1;
     </sql>
     <select id="findLast" resultType="string">
-        <include refid="otherMax"/>
+        <include refid="max"/>
     </select>
 
     <select id="findAll" resultMap="classResult">

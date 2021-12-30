@@ -99,7 +99,7 @@ class StudentServiceApplicationTests {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setId(2);
         student.setClassInfo(classInfo);
-        for (int i = 5; i < 1000; i++) {
+        for (int i = 1000; i < 5000; i++) {
             student.setSerial(i);
             studentMapper.add(student);
         }
