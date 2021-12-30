@@ -72,8 +72,8 @@
 
     <select id="findAllByClassId" parameterType="int" resultMap="gradeResult">
         SELECT g_id, g_language, g_math, g_english, g_status, g_creator, g_creation_time, g_last_editor, g_last_time
-        FROM grades g left outer join students s on g.s_id = s.s_id
-        WHERE s.c_id = #{classId};
+        FROM grades g
+        WHERE s_id in (SELECT s_id FROM students WHERE c_id = #{classId});
     </select>
 
     <select id="findAllByClassInfo" parameterType="ClassInfo" resultMap="gradeResultWithStudent">
