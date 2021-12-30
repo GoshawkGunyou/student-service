@@ -5,19 +5,13 @@ import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.mapper.ClassInfoMapper;
 import com.example.studentservice.mapper.GradeMapper;
 import com.example.studentservice.mapper.StudentMapper;
+import com.example.studentservice.form.ScoreQuery;
 import com.example.studentservice.service.ClassInfoService;
 import com.example.studentservice.service.GradeService;
 import com.example.studentservice.service.StudentService;
-import org.apache.ibatis.session.ExecutorType;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionManager;
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @SpringBootTest
 class StudentServiceApplicationTests {
@@ -87,8 +81,8 @@ class StudentServiceApplicationTests {
 
     @Test
     void studentGradeDTOLimits() {
-        System.out.println(gradeService.getGradeOf("zfl", 60.0, 100.0));
-        System.out.println(gradeService.getGradeOf("zfl", 20.0, 50.0));
+        System.out.println(gradeService.getGradeOf(new ScoreQuery("zfl", 60.0, 100.0)));
+        System.out.println(gradeService.getGradeOf(new ScoreQuery("zfl", 20.0, 50.0)));
     }
 
     @Test

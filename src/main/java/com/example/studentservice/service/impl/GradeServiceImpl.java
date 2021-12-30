@@ -1,17 +1,15 @@
 package com.example.studentservice.service.impl;
 
 import com.example.studentservice.assembler.GradeAssembler;
-import com.example.studentservice.assembler.StudentAssembler;
 import com.example.studentservice.domain.grade.Grade;
 import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.dto.StudentGradeDTO;
 import com.example.studentservice.mapper.GradeMapper;
 import com.example.studentservice.mapper.StudentMapper;
+import com.example.studentservice.form.ScoreQuery;
 import com.example.studentservice.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class GradeServiceImpl implements GradeService {
@@ -47,15 +45,15 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public StudentGradeDTO getGradeOf(String name, Double min, Double max) {
+    public StudentGradeDTO getGradeOf(ScoreQuery scoreQuery) {
         StudentGradeDTO studentGradeDTO = null;
         Student student = new Student();
-        student.setName(name);
+        student.setName(scoreQuery.getStudentName());
         student = studentMapper.findByStudent(student);
         if (student == null) return null;
         Grade grade = gradeMapper.findByStudentSerialAndName(student);
         if (grade != null) {
-            studentGradeDTO = GradeAssembler.create(grade, min, max);
+            studentGradeDTO = GradeAssembler.create(grade, scoreQuery.getMin(), scoreQuery.getMax());
         }
         return studentGradeDTO;
     }

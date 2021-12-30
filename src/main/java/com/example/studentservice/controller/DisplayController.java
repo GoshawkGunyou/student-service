@@ -1,6 +1,6 @@
 package com.example.studentservice.controller;
 
-import com.example.studentservice.query.GradeQuery;
+import com.example.studentservice.form.ScoreQuery;
 import com.example.studentservice.service.ClassInfoService;
 import com.example.studentservice.service.GradeService;
 import com.example.studentservice.service.StudentService;
@@ -51,8 +51,8 @@ public class DisplayController {
     }
 
     @RequestMapping("/student/grade")
-    public String toGrade(Model model, GradeQuery gradeQuery) {
-        model.addAttribute("studentGradeDTO", gradeService.getGradeOf(gradeQuery.getStudentName(), gradeQuery.getMin(), gradeQuery.getMax()));
+    public String toGrade(Model model, ScoreQuery scoreQuery) {
+        model.addAttribute("studentGradeDTO", gradeService.getGradeOf(scoreQuery));
         return "studentGrade";
     }
 }

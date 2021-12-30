@@ -18,5 +18,6 @@ public class StudentDTO {
     String className;
     String address;
     Integer age;
+    // Potentially more than one score per student
     List<ScoresDTO> scores;
 }

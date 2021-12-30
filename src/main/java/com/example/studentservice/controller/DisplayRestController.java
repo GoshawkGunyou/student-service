@@ -2,10 +2,11 @@ package com.example.studentservice.controller;
 
 import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.dto.ClassInfoDTO;
-import com.example.studentservice.query.GradeQuery;
+import com.example.studentservice.form.ClassQuery;
+import com.example.studentservice.form.ScoreQuery;
 import com.example.studentservice.dto.StudentDTO;
 import com.example.studentservice.dto.StudentGradeDTO;
-import com.example.studentservice.query.StudentQuery;
+import com.example.studentservice.form.StudentQuery;
 import com.example.studentservice.service.ClassInfoService;
 import com.example.studentservice.service.GradeService;
 import com.example.studentservice.service.StudentService;
@@ -28,8 +29,8 @@ public class DisplayRestController {
 
     @RequestMapping("/grade")
     @CrossOrigin
-    public StudentGradeDTO toGrade(@RequestBody GradeQuery q) {
-        return gradeService.getGradeOf(q.getStudentName(), q.getMin(), q.getMax());
+    public StudentGradeDTO toGrade(@RequestBody ScoreQuery q) {
+        return gradeService.getGradeOf(q);
     }
 
     @RequestMapping("/loadStudents")
@@ -46,8 +47,8 @@ public class DisplayRestController {
 
     @RequestMapping("/classInfo")
     @CrossOrigin
-    public ClassInfoDTO findClassInfo(@RequestBody String className, @RequestBody String classSerial) {
-        return classInfoService.getClassInfo(className, classSerial);
+    public ClassInfoDTO findClassInfo(@RequestBody ClassQuery classQuery) {
+        return classInfoService.getClassInfo(classQuery.getClassName(), classQuery.getClassSerial());
     }
 
 

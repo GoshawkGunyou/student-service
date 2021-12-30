@@ -1,4 +1,4 @@
-package com.example.studentservice.query;
+package com.example.studentservice.form;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
