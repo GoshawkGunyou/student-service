@@ -32,9 +32,7 @@ public class Student {
 
     public void setSerial(Integer id) {
         LocalDate now = LocalDate.now();
-        String month = now.getMonth().getValue() > 9 ? "" + now.getMonthValue() : "0" + now.getMonthValue();
-        String stringId = StudentAssembler.parseIntToSer(id);
-        this.serial = String.format("%d-%s-%s", now.getYear(), month, stringId);
+        this.serial = String.format("%d-%s-%s", now.getYear(), String.format("%03d", now.getMonthValue()), StudentAssembler.parseIntToSer(id));
     }
 
 

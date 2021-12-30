@@ -20,12 +20,7 @@ public class ClassInfoAssembler {
     }
 
     public static String parseIntToSer(Integer id) {
-        if (id < 10)
-            return  "00" + id;
-        else if (id < 100)
-            return  "0" + id;
-        else
-            return "" + id;
+        return String.format("%03d", id);
     }
 
 

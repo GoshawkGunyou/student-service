@@ -30,11 +30,7 @@ public class StudentAssembler {
     }
 
     public static String parseIntToSer(Integer id) {
-        if (id < 10) return "0000" + id;
-        if (id < 100) return "000" + id;
-        if (id < 1000) return "00" + id;
-        if (id < 10000) return "0" + id;
-        return id + "";
+        return String.format("%d05", id);
     }
 
 

@@ -39,8 +39,8 @@ public class DisplayRestController {
 
     @RequestMapping("/student")
     @CrossOrigin
-    public StudentDTO findStudent(@RequestBody String studentName, @RequestBody String studentSerial) {
-        return studentService.getInfo(studentSerial, studentName);
+    public StudentDTO findStudent(@RequestBody String sName, @RequestBody String sSerial) {
+        return studentService.getInfo(sName, sSerial);
     }
 
     @RequestMapping("/classInfo")

@@ -24,7 +24,7 @@ public class ClassInfo {
     public void setSerial(Integer id) {
         LocalDate now = LocalDate.now();
         String stringId = ClassInfoAssembler.parseIntToSer(id);
-        String month = now.getMonth().getValue() > 9 ? "" + now.getMonthValue() : "0" + now.getMonthValue();
+        String month = String.format("%02d", LocalDate.now().getMonthValue());
         this.serial = now.getYear() + "-" + month + "-" + stringId;
     }
 }
