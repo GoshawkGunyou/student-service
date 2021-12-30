@@ -58,6 +58,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDTO getInfo(String serial, String name) {
+        if (serial == null && name == null) {
+            return null;
+        }
         StudentDTO studentDTO = null;
         Student student = new Student();
         student.setName("".equals(name) ? null : name);

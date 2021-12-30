@@ -1,6 +1,6 @@
 package com.example.studentservice.controller;
 
-import com.example.studentservice.dto.GradeQuery;
+import com.example.studentservice.query.GradeQuery;
 import com.example.studentservice.service.ClassInfoService;
 import com.example.studentservice.service.GradeService;
 import com.example.studentservice.service.StudentService;

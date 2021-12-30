@@ -1,4 +1,4 @@
-package com.example.studentservice.dto;
+package com.example.studentservice.query;
 
 import lombok.Data;
 
