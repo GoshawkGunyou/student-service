@@ -32,7 +32,7 @@ public class Student {
 
     public void setSerial(Integer id) {
         LocalDate now = LocalDate.now();
-        this.serial = String.format("%d-%s-%s", now.getYear(), String.format("%03d", now.getMonthValue()), StudentAssembler.parseIntToSer(id));
+        this.serial = String.format("%d-%s-%s", now.getYear(), String.format("%02d", now.getMonthValue()), StudentAssembler.parseIntToSer(id));
     }
 
 

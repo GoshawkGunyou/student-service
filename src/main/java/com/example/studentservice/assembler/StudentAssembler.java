@@ -30,7 +30,7 @@ public class StudentAssembler {
     }
 
     public static String parseIntToSer(Integer id) {
-        return String.format("%d05", id);
+        return String.format("%05d", id);
     }
 
 
