@@ -1,31 +1,27 @@
 package com.example.studentservice.assembler;
 
 import com.example.studentservice.domain.grade.Grade;
-import com.example.studentservice.domain.grade.GradeClassAverage;
 import com.example.studentservice.domain.schoolclasses.ClassInfo;
 import com.example.studentservice.dto.ClassInfoDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClassInfoAssembler {
-    public static ClassInfoDTO parse(GradeClassAverage gradeClassAverage) {
+    public static ClassInfoDTO create(List<Grade> gradeList, ClassInfo classInfo) {
+        ClassInfoDTO classInfoDTO = new ClassInfoDTO();
         // Averages list of Math, English, Language and Total average values in specified order.
-        List<Double> averages = gradeClassAverage.getAverages();
-
-        ClassInfoDTO classInfoDTO = new ClassInfoDTO();
-        classInfoDTO.setClassSerial(gradeClassAverage.getClassInfo().getSerial());
-        classInfoDTO.setClassName(gradeClassAverage.getClassInfo().getName());
-        classInfoDTO.setMathAvg(averages.get(0));
-        classInfoDTO.setEnglishAvg(averages.get(1));
-        classInfoDTO.setLanguageAvg(averages.get(2));
-        classInfoDTO.setTotalAvg(averages.get(3));
-        return classInfoDTO;
-    }
-
-    public static ClassInfoDTO parse(ClassInfo classInfo) {
-        ClassInfoDTO classInfoDTO = new ClassInfoDTO();
-        classInfoDTO.setClassName(classInfo.getName());
+        if (gradeList != null) {
+            classInfoDTO.doAverages(gradeList);
+        }
         classInfoDTO.setClassSerial(classInfo.getSerial());
+        classInfoDTO.setClassName(classInfo.getName());
         return classInfoDTO;
     }
+
+    public static String parseIntToSer(Integer id) {
+        return String.format("%03d", id);
+    }
+
+
 }

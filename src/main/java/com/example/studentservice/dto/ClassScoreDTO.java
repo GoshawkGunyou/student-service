@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class GradeDTO {
+public class ClassScoreDTO {
     ClassType classType;
     Double grade;
 }

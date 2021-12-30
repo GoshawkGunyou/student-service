@@ -8,8 +8,9 @@ import java.time.LocalDateTime;
 @Data
 @Component
 public class MetaData {
-    String creator;
-    LocalDateTime creationTime;
-    String lastEditor;
-    LocalDateTime lastEdit;
+    private Integer status;
+    private String creator;
+    private LocalDateTime creationTime;
+    private String lastEditor;
+    private LocalDateTime lastEdit;
 }

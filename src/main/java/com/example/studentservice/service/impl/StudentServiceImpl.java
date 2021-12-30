@@ -24,7 +24,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> findInClass(Integer classId) {
-        System.out.println(studentMapper.findAllByClassId(classId));
         return studentMapper.findAllByClassId(classId);
     }
 
@@ -33,6 +32,25 @@ public class StudentServiceImpl implements StudentService {
         return null;
     }
 
+
+
+    @Override
+    public Integer insert(Student student) {
+        // find last insereted student and find serial based on that + 1
+        student.setSerial(parseSerial(studentMapper.findLast()));
+        return studentMapper.add(student);
+    }
+
+    /**
+     *
+     * @param serial studentSerial to parse into int
+     * @return int representation of serial
+     */
+    private Integer parseSerial(String serial) {
+        return Integer.parseInt(serial.substring(serial.length() - 5));
+    }
+
+
     @Override
     public Student findById(Integer id) {
         return null;
@@ -40,13 +58,21 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDTO getInfo(String serial, String name) {
+        if (serial == null && name == null) {
+            return null;
+        }
         StudentDTO studentDTO = null;
         Student student = new Student();
         student.setName("".equals(name) ? null : name);
         student.setSerial("".equals(serial) ? null : serial);
-        Grade grade = gradeMapper.findByStudentSerialAndName(student);
-        if (grade != null) {
-            studentDTO = StudentAssembler.parse(grade);
+        student = studentMapper.findByStudent(student);
+        if (student == null)
+            return null;
+        ClassInfo classInfo = student.getClassInfo();
+//        Grade grade = gradeMapper.findByStudentSerialAndName(student);
+        List<Grade> grades = gradeMapper.findByStudentId(student.getId());
+        if (grades != null) {
+            studentDTO = StudentAssembler.create(grades, student, classInfo);
         }
         return studentDTO;
     }

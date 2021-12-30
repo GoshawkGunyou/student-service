@@ -1,10 +1,8 @@
 package com.example.studentservice.service;
 
 import com.example.studentservice.domain.grade.Grade;
-import com.example.studentservice.domain.student.Student;
-import com.example.studentservice.dto.ClassInfoDTO;
-import com.example.studentservice.dto.StudentDTO;
 import com.example.studentservice.dto.StudentGradeDTO;
+import com.example.studentservice.form.ScoreQuery;
 
 public interface GradeService {
     Boolean insert(Grade grade);
@@ -15,6 +13,6 @@ public interface GradeService {
 
     Boolean update(Grade grade);
 
-    StudentGradeDTO getGradeOf(String name, Double min, Double max);
+    StudentGradeDTO getGradeOf(ScoreQuery scoreQuery);
 
 }

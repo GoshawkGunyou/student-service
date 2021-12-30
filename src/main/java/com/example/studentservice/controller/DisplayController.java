@@ -1,6 +1,6 @@
 package com.example.studentservice.controller;
 
-import com.example.studentservice.dto.GradeQuery;
+import com.example.studentservice.form.ScoreQuery;
 import com.example.studentservice.service.ClassInfoService;
 import com.example.studentservice.service.GradeService;
 import com.example.studentservice.service.StudentService;
@@ -9,8 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Deprecated
 @Controller
-@RequestMapping("display")
+@RequestMapping("test")
 public class DisplayController {
 
     @Autowired
@@ -23,8 +24,8 @@ public class DisplayController {
     GradeService gradeService;
 
     @RequestMapping("/class")
-    public String displayClass(Integer classVar, String className, Model model) {
-        model.addAttribute("classInfo", classInfoService.getClassInfo(className, classVar));
+    public String displayClass(String classVar, Model model) {
+        model.addAttribute("classInfo", classInfoService.getClassInfo(classVar, null));
         return "classInfo";
     }
 
@@ -51,8 +52,8 @@ public class DisplayController {
     }
 
     @RequestMapping("/student/grade")
-    public String toGrade(Model model, GradeQuery gradeQuery) {
-        model.addAttribute("studentGradeDTO", gradeService.getGradeOf(gradeQuery.getStudentName(), gradeQuery.getMin(), gradeQuery.getMax()));
+    public String toGrade(Model model, ScoreQuery scoreQuery) {
+        model.addAttribute("studentGradeDTO", gradeService.getGradeOf(scoreQuery));
         return "studentGrade";
     }
 }

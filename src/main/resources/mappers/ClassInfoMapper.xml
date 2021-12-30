@@ -4,25 +4,47 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.studentservice.mapper.ClassInfoMapper">
     <resultMap id="classResult" type="ClassInfo">
-        <id javaType="int" column="id" property="id" />
-        <result property="serial" column="serial" javaType="string"/>
-        <result property="name" column="name" javaType="string"/>
-        <result property="status" column="status" javaType="ClassStatus"/>
+        <id javaType="int" property="id" column="c_id"/>
+        <result property="serial" column="c_serial" javaType="string"/>
+        <result property="name" column="c_name" javaType="string"/>
         <association property="metaData" javaType="MetaData">
-            <result property="creator" column="creator"/>
-            <result property="creationTime" column="creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
-            <result property="lastEditor" column="last_editor"/>
-            <result property="lastEdit" column="last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            <result property="status" column="c_status"/>
+            <result property="creator" column="c_creator"/>
+            <result property="creationTime" column="c_creation_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+            <result property="lastEditor" column="c_last_editor"/>
+            <result property="lastEdit" column="c_last_time" javaType="java.time.LocalDateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
         </association>
     </resultMap>
 
-    <select id="findAll" resultMap="classResult">
-        SELECT * FROM classes;
+    <sql id="otherMax">
+        SELECT c_serial FROM classes WHERE c_id = (SELECT MAX(c_id) FROM classes);
+    </sql>
+
+    <sql id="max">
+        SELECT c_serial FROM classes ORDER BY c_id DESC LIMIT 1;
+    </sql>
+    <select id="findLast" resultType="string">
+        <include refid="max"/>
     </select>
 
-    <select id="findById" resultMap="classResult" parameterType="ClassInfo">
-        SELECT * FROM classes
-        WHERE id = #{id};
+    <select id="findAll" resultMap="classResult">
+        SELECT c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time FROM classes;
+    </select>
+
+    <select id="findBy" resultMap="classResult" parameterType="ClassInfo">
+        SELECT c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time FROM classes
+        WHERE
+        <trim suffix="" suffixOverrides="AND">
+            <if test="serial!=null">
+                c_serial = #{serial} AND
+            </if>
+            <if test="name!=null">
+                c_name = #{name} AND
+            </if>
+            <if test="id!=null">
+                c_id = #{id} AND
+            </if>
+        </trim>;
     </select>
 
 

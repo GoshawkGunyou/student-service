@@ -1,25 +1,36 @@
 package com.example.studentservice.assembler;
 
 import com.example.studentservice.domain.grade.Grade;
+import com.example.studentservice.domain.schoolclasses.ClassInfo;
+import com.example.studentservice.domain.student.Student;
+import com.example.studentservice.dto.ScoresDTO;
 import com.example.studentservice.dto.StudentDTO;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentAssembler {
-    public static StudentDTO parse(Grade grade) {
+    public static StudentDTO create(List<Grade> gradeList, Student student, ClassInfo classInfo) {
         StudentDTO studentDTO = new StudentDTO();
-        studentDTO.setSerial(grade.getStudent().getSerial());
-        studentDTO.setName(grade.getStudent().getName());
-        studentDTO.setClassName(grade.getStudent().getClassInfo().getName());
-        studentDTO.setAddress(grade.getStudent().getAddress());
+        studentDTO.setSerial(student.getSerial());
+        studentDTO.setName(student.getName());
+        studentDTO.setClassName(classInfo.getName());
+        studentDTO.setAddress(student.getAddress());
         // Age = difference of D.O.B to now
-        studentDTO.setAge(LocalDate.now().getYear() - grade.getStudent().getDOB().getYear());
-        studentDTO.setEnglish(grade.getEnglish());
-        studentDTO.setMaths(grade.getMath());
-        studentDTO.setLanguage(grade.getLanguage());
-        studentDTO.setTotal(grade.getTotal());
-        studentDTO.setAverage(grade.getAverage());
+        studentDTO.setAge(LocalDate.now().getYear() - student.getDOB().getYear());
+        studentDTO.setScores(parseGrades(gradeList));
         return studentDTO;
+    }
+
+    private static List<ScoresDTO> parseGrades(List<Grade> grades) {
+        List<ScoresDTO> scoresList = new ArrayList<>();
+        grades.forEach(grade -> scoresList.add(new ScoresDTO(grade.getLanguage(), grade.getMath(), grade.getEnglish())));
+        return scoresList;
+    }
+
+    public static String parseIntToSer(Integer id) {
+        return String.format("%05d", id);
     }
 
 
