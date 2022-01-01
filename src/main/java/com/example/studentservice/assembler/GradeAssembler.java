@@ -21,13 +21,13 @@ public class GradeAssembler {
 
     private static List<ClassScoreDTO> buildGradeDTO(Grade grade, Double min, Double max) {
         List<ClassScoreDTO> classScores = new ArrayList<>();
-        var val = 0.0;
-        if (grade.getMath() != null && (val = grade.getMath()) >= min && val <= max)
+        Double val;
+        if ((val = grade.getMath()) != null && val >= min && val <= max)
             classScores.add(new ClassScoreDTO(ClassType.MATH, val));
-        if (grade.getEnglish() != null && (val = grade.getEnglish()) >= min && val <= max)
-            classScores.add(new ClassScoreDTO(ClassType.ENGLISH, grade.getEnglish()));
-        if (grade.getLanguage() != null && (val = grade.getLanguage()) >= min && val <= max)
-            classScores.add(new ClassScoreDTO(ClassType.LANGUAGE, grade.getLanguage()));
+        if ((val = grade.getEnglish())!= null && val >= min && val <= max)
+            classScores.add(new ClassScoreDTO(ClassType.ENGLISH, val));
+        if ((val = grade.getLanguage()) != null && val >= min && val <= max)
+            classScores.add(new ClassScoreDTO(ClassType.LANGUAGE, val));
         return classScores;
     }
 }

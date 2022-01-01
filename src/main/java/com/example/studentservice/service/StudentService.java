@@ -12,6 +12,4 @@ public interface StudentService {
 
     Student findById(Integer id);
     StudentDTO getInfo(String serial, String name);
-
-
 }

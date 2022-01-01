@@ -42,6 +42,8 @@ public class DisplayRestController {
     @RequestMapping("/student")
     @CrossOrigin
     public StudentDTO findStudent(@RequestBody StudentQuery studentQuery) {
+        if (studentQuery.isNull()) return null;
+        studentQuery.clean();
         return studentService.getInfo(studentQuery.getStudentSerial(), studentQuery.getStudentName());
     }
 

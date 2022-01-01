@@ -10,10 +10,12 @@ import com.example.studentservice.mapper.StudentMapper;
 import com.example.studentservice.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
@@ -58,13 +60,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDTO getInfo(String serial, String name) {
-        if (serial == null && name == null) {
-            return null;
-        }
         StudentDTO studentDTO = null;
         Student student = new Student();
-        student.setName("".equals(name) ? null : name);
-        student.setSerial("".equals(serial) ? null : serial);
+        student.setName(name);
+        student.setSerial(serial);
         student = studentMapper.findByStudent(student);
         if (student == null)
             return null;
