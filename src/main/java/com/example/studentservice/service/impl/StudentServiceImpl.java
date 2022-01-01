@@ -7,6 +7,7 @@ import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.dto.StudentDTO;
 import com.example.studentservice.mapper.GradeMapper;
 import com.example.studentservice.mapper.StudentMapper;
+import com.example.studentservice.response.DataResponse;
 import com.example.studentservice.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,14 @@ public class StudentServiceImpl implements StudentService {
     GradeMapper gradeMapper;
 
     @Override
-    public List<Student> findInClass(Integer classId) {
-        return studentMapper.findAllByClassId(classId);
+    public DataResponse<List<Student>> findInClass(Integer classId) {
+        DataResponse<List<Student>> dataResponse = new DataResponse<>();
+        dataResponse.setData(studentMapper.findAllByClassId(classId));
+        if (dataResponse.getData() == null)
+            dataResponse.setMessage("Not found");
+        else
+            dataResponse.setMessage("Success");
+        return dataResponse;
     }
 
     @Override

@@ -2,16 +2,20 @@ package com.example.studentservice.controller;
 
 import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.dto.ClassInfoDTO;
-import com.example.studentservice.form.ClassQuery;
-import com.example.studentservice.form.ScoreQuery;
 import com.example.studentservice.dto.StudentDTO;
 import com.example.studentservice.dto.StudentGradeDTO;
+import com.example.studentservice.form.ClassQuery;
+import com.example.studentservice.form.ScoreQuery;
 import com.example.studentservice.form.StudentQuery;
+import com.example.studentservice.response.DataResponse;
 import com.example.studentservice.service.ClassInfoService;
 import com.example.studentservice.service.GradeService;
 import com.example.studentservice.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -29,13 +33,16 @@ public class DisplayRestController {
 
     @RequestMapping("/grade")
     @CrossOrigin
-    public StudentGradeDTO toGrade(@RequestBody ScoreQuery q) {
+    public DataResponse<StudentGradeDTO> toGrade(@RequestBody ScoreQuery q) {
+        if (q.isNull())
+            return new DataResponse<>(null, "Empty query");
+        q.clean();
         return gradeService.getGradeOf(q);
     }
 
     @RequestMapping("/loadStudents")
     @CrossOrigin
-    public List<Student> students(@RequestBody Integer classId) {
+    public DataResponse<List<Student>> students(@RequestBody Integer classId) {
         return studentService.findInClass(classId);
     }
 

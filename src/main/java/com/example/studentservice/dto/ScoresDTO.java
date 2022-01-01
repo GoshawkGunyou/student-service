@@ -1,9 +1,10 @@
 package com.example.studentservice.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class ScoresDTO {
+public class ScoresDTO{
     Double language;
     Double math;
     Double english;
