@@ -11,12 +11,13 @@ public class StudentQuery {
     private String studentName;
     private String studentSerial;
 
-    public void clean() {
+    private void clean() {
         this.strip();
         this.trim();
     }
 
     public Boolean isNull() {
+        clean();
         return studentName == null && studentSerial == null;
     }
 

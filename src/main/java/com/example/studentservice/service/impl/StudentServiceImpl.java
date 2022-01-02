@@ -66,20 +66,20 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDTO getInfo(String serial, String name) {
-        StudentDTO studentDTO = null;
+    public DataResponse<StudentDTO> getInfo(String serial, String name) {
+        DataResponse<StudentDTO> dataResponse = new DataResponse<>();
         Student student = new Student();
         student.setName(name);
         student.setSerial(serial);
         student = studentMapper.findByStudent(student);
         if (student == null)
-            return null;
+            return new DataResponse<>(null, "Student not found");
         ClassInfo classInfo = student.getClassInfo();
-//        Grade grade = gradeMapper.findByStudentSerialAndName(student);
         List<Grade> grades = gradeMapper.findByStudentId(student.getId());
         if (grades != null) {
-            studentDTO = StudentAssembler.create(grades, student, classInfo);
+            dataResponse.setData(StudentAssembler.create(grades, student, classInfo));
+            dataResponse.setMessage("success");
         }
-        return studentDTO;
+        return dataResponse;
     }
 }

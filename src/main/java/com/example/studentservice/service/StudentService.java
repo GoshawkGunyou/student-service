@@ -12,5 +12,5 @@ public interface StudentService {
     Integer insert(Student student);
 
     Student findById(Integer id);
-    StudentDTO getInfo(String serial, String name);
+    DataResponse<StudentDTO> getInfo(String serial, String name);
 }
