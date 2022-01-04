@@ -1,7 +1,9 @@
 package com.example.studentservice.dto;
 
 import com.example.studentservice.domain.grade.Grade;
+import com.example.studentservice.domain.schoolclasses.ClassInfo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,18 +13,23 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class ClassInfoDTO {
-    String classSerial;
-    String className;
-    Double languageAvg;
-    Double mathAvg;
-    Double englishAvg;
-    Double totalAvg;
+    private String classSerial;
+    private String className;
+    private Double languageAvg;
+    private Double mathAvg;
+    private Double englishAvg;
+    private Double totalAvg;
+
+    public void setClassInfo (ClassInfo classInfo) {
+        setClassName(classInfo.getName());
+        setClassSerial(classInfo.getSerial());
+    }
 
     public void setClassSerial(String classSerial) {
         this.classSerial = "CL-" + classSerial;
     }
 
-    public void doAverages(List<Grade> grades) {
+    public void setGrades(List<Grade> grades) {
         int mathCount = 0;
         int languageCount = 0;
         int englishCount = 0;

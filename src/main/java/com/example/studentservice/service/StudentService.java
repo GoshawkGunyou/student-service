@@ -2,16 +2,15 @@ package com.example.studentservice.service;
 
 import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.dto.StudentDTO;
+import com.example.studentservice.response.DataResponse;
 
 import java.util.List;
 
 public interface StudentService {
-    List<Student> findInClass(Integer classId);
+    DataResponse<List<Student>> findInClass(Integer classId);
     List<Student> findInClass(String className);
     Integer insert(Student student);
 
     Student findById(Integer id);
-    StudentDTO getInfo(String serial, String name);
-
-
+    DataResponse<StudentDTO> getInfo(String serial, String name);
 }

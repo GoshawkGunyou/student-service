@@ -4,14 +4,17 @@ import com.example.studentservice.assembler.GradeAssembler;
 import com.example.studentservice.domain.grade.Grade;
 import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.dto.StudentGradeDTO;
+import com.example.studentservice.form.ScoreQuery;
 import com.example.studentservice.mapper.GradeMapper;
 import com.example.studentservice.mapper.StudentMapper;
-import com.example.studentservice.form.ScoreQuery;
+import com.example.studentservice.response.DataResponse;
 import com.example.studentservice.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class GradeServiceImpl implements GradeService {
 
     @Autowired
@@ -45,17 +48,21 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public StudentGradeDTO getGradeOf(ScoreQuery scoreQuery) {
-        StudentGradeDTO studentGradeDTO = null;
+    public DataResponse<StudentGradeDTO> getGradeOf(ScoreQuery scoreQuery) {
+        DataResponse<StudentGradeDTO> response = new DataResponse();
         Student student = new Student();
         student.setName(scoreQuery.getStudentName());
         student = studentMapper.findByStudent(student);
-        if (student == null) return null;
+        if (student == null) {
+            response.setMessage("Student not found");
+            return response;
+        }
         Grade grade = gradeMapper.findByStudentSerialAndName(student);
         if (grade != null) {
-            studentGradeDTO = GradeAssembler.create(grade, scoreQuery.getMin(), scoreQuery.getMax());
+            response.setData(GradeAssembler.create(grade, scoreQuery.getMin(), scoreQuery.getMax()));
+            response.setMessage("Success");
         }
-        return studentGradeDTO;
+        return response;
     }
 
 

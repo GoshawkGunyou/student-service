@@ -2,6 +2,7 @@ package com.example.studentservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
-public class StudentDTO {
-    String serial;
-    String name;
-    String className;
-    String address;
-    Integer age;
+public class StudentDTO{
+    private String serial;
+    private String name;
+    private String className;
+    private String address;
+    private Integer age;
     // Potentially more than one score per student
-    List<ScoresDTO> scores;
+    private List<ScoresDTO> scores;
 }

@@ -9,10 +9,12 @@ import com.example.studentservice.mapper.GradeMapper;
 import com.example.studentservice.service.ClassInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ClassInfoServiceImpl implements ClassInfoService {
     @Autowired
     ClassInfoMapper classInfoMapper;
@@ -50,8 +52,15 @@ public class ClassInfoServiceImpl implements ClassInfoService {
         return classInfoMapper.findAll();
     }
 
+    /**
+     * Finds a single ClassInfo based on given class name or serial. Can be null
+     * @param name class name to search with.
+     * @param serial class serial to search with.
+     * @return ClassInfo if exists in database, otherwise null.
+     */
     @Override
     public ClassInfo findClass(String name, String serial) {
+        if (name == null && serial == null) return null;
         ClassInfo classInfo = new ClassInfo();
         classInfo.setName(name);
         classInfo.setSerial(serial);

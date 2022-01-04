@@ -3,6 +3,7 @@ package com.example.studentservice.service;
 import com.example.studentservice.domain.grade.Grade;
 import com.example.studentservice.dto.StudentGradeDTO;
 import com.example.studentservice.form.ScoreQuery;
+import com.example.studentservice.response.DataResponse;
 
 public interface GradeService {
     Boolean insert(Grade grade);
@@ -13,6 +14,6 @@ public interface GradeService {
 
     Boolean update(Grade grade);
 
-    StudentGradeDTO getGradeOf(ScoreQuery scoreQuery);
+    DataResponse<StudentGradeDTO> getGradeOf(ScoreQuery scoreQuery);
 
 }

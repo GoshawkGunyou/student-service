@@ -7,13 +7,16 @@ import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.dto.StudentDTO;
 import com.example.studentservice.mapper.GradeMapper;
 import com.example.studentservice.mapper.StudentMapper;
+import com.example.studentservice.response.DataResponse;
 import com.example.studentservice.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
@@ -23,8 +26,14 @@ public class StudentServiceImpl implements StudentService {
     GradeMapper gradeMapper;
 
     @Override
-    public List<Student> findInClass(Integer classId) {
-        return studentMapper.findAllByClassId(classId);
+    public DataResponse<List<Student>> findInClass(Integer classId) {
+        DataResponse<List<Student>> dataResponse = new DataResponse<>();
+        dataResponse.setData(studentMapper.findAllByClassId(classId));
+        if (dataResponse.getData() == null)
+            dataResponse.setMessage("Not found");
+        else
+            dataResponse.setMessage("Success");
+        return dataResponse;
     }
 
     @Override
@@ -57,23 +66,20 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDTO getInfo(String serial, String name) {
-        if (serial == null && name == null) {
-            return null;
-        }
-        StudentDTO studentDTO = null;
+    public DataResponse<StudentDTO> getInfo(String serial, String name) {
+        DataResponse<StudentDTO> dataResponse = new DataResponse<>();
         Student student = new Student();
-        student.setName("".equals(name) ? null : name);
-        student.setSerial("".equals(serial) ? null : serial);
+        student.setName(name);
+        student.setSerial(serial);
         student = studentMapper.findByStudent(student);
         if (student == null)
-            return null;
+            return new DataResponse<>(null, "Student not found");
         ClassInfo classInfo = student.getClassInfo();
-//        Grade grade = gradeMapper.findByStudentSerialAndName(student);
         List<Grade> grades = gradeMapper.findByStudentId(student.getId());
         if (grades != null) {
-            studentDTO = StudentAssembler.create(grades, student, classInfo);
+            dataResponse.setData(StudentAssembler.create(grades, student, classInfo));
+            dataResponse.setMessage("success");
         }
-        return studentDTO;
+        return dataResponse;
     }
 }
