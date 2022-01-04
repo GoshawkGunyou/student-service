@@ -14,11 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @Component
 public class StudentDTO{
-    String serial;
-    String name;
-    String className;
-    String address;
-    Integer age;
+    private String serial;
+    private String name;
+    private String className;
+    private String address;
+    private Integer age;
     // Potentially more than one score per student
-    List<ScoresDTO> scores;
+    private List<ScoresDTO> scores;
 }

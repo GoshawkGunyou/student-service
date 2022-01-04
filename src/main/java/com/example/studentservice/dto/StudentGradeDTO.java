@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentGradeDTO {
-    String studentName;
-    String className;
-    List<ClassScoreDTO> gradeDTOs;
+    private String studentName;
+    private String className;
+    private List<ClassScoreDTO> gradeDTOs;
 }

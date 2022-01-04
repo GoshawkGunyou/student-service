@@ -6,14 +6,17 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ScoreQuery {
-    String studentName;
-    Double min;
-    Double max;
+    private String studentName;
+    private Double min;
+    private Double max;
 
+    /**
+     * Assumes null pointer already checked. Will clean the input and return whether the query object is considered null, based on required fields
+     * @return false if student name is null, true otherwise.
+     */
     public Boolean isNull() {
-        if (studentName == null)
-            return true;
-        return min == null && max == null;
+        clean();
+        return (studentName == null);
     }
 
     public void clean() {

@@ -8,6 +8,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @AllArgsConstructor
 public class ClassScoreDTO {
-    ClassType classType;
-    Double grade;
+    private ClassType classType;
+    private Double grade;
 }

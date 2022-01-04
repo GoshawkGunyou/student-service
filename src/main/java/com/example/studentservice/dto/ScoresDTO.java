@@ -5,11 +5,11 @@ import lombok.EqualsAndHashCode;
 
 @Data
 public class ScoresDTO{
-    Double language;
-    Double math;
-    Double english;
-    Double total;
-    Double average;
+    private Double language;
+    private Double math;
+    private Double english;
+    private Double total;
+    private Double average;
 
     public ScoresDTO(Double language, Double math, Double english) {
         this.language = language;

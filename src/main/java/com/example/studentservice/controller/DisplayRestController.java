@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("display")
+@RequestMapping("/display")
 public class DisplayRestController {
     @Autowired
     GradeService gradeService;
@@ -34,22 +34,21 @@ public class DisplayRestController {
     @RequestMapping("/grade")
     @CrossOrigin
     public DataResponse<StudentGradeDTO> toGrade(@RequestBody ScoreQuery q) {
-        if (q.isNull())
-            return new DataResponse<>(null, "Empty query");
-        q.clean();
+        if (q == null || q.isNull()) return new DataResponse<>(null, "Empty query");
         return gradeService.getGradeOf(q);
     }
 
     @RequestMapping("/loadStudents")
     @CrossOrigin
     public DataResponse<List<Student>> students(@RequestBody Integer classId) {
+        if (classId == null) return new DataResponse<>(null, "Invalid query");
         return studentService.findInClass(classId);
     }
 
     @RequestMapping("/student")
     @CrossOrigin
     public DataResponse<StudentDTO> findStudent(@RequestBody StudentQuery studentQuery) {
-        if (studentQuery.isNull()) return null;
+        if (studentQuery == null || studentQuery.isNull()) return null;
         return studentService.getInfo(studentQuery.getStudentSerial(), studentQuery.getStudentName());
     }
 
