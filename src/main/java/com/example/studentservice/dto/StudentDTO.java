@@ -15,9 +15,9 @@ import java.util.List;
 @Component
 public class StudentDTO{
     private String serial;
-    private String name;
-    private String className;
+    private String studentName;
     private String address;
+    private String className;
     private Integer age;
     // Potentially more than one score per student
     private List<ScoresDTO> scores;

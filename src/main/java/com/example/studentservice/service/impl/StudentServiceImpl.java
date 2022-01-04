@@ -28,8 +28,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public DataResponse<List<Student>> findInClass(Integer classId) {
         DataResponse<List<Student>> dataResponse = new DataResponse<>();
-        dataResponse.setData(studentMapper.findAllByClassId(classId));
-        if (dataResponse.getData() == null)
+        dataResponse.setDataObject(studentMapper.findAllByClassId(classId));
+        if (dataResponse.getDataObject() == null)
             dataResponse.setMessage("Not found");
         else
             dataResponse.setMessage("Success");
@@ -77,7 +77,7 @@ public class StudentServiceImpl implements StudentService {
         ClassInfo classInfo = student.getClassInfo();
         List<Grade> grades = gradeMapper.findByStudentId(student.getId());
         if (grades != null) {
-            dataResponse.setData(StudentAssembler.create(grades, student, classInfo));
+            dataResponse.setDataObject(StudentAssembler.create(grades, student, classInfo));
             dataResponse.setMessage("success");
         }
         return dataResponse;

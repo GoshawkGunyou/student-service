@@ -12,10 +12,7 @@ import com.example.studentservice.service.ClassInfoService;
 import com.example.studentservice.service.GradeService;
 import com.example.studentservice.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,9 +30,9 @@ public class DisplayRestController {
 
     @RequestMapping("/grade")
     @CrossOrigin
-    public DataResponse<StudentGradeDTO> toGrade(@RequestBody ScoreQuery q) {
-        if (q == null || q.isNull()) return new DataResponse<>(null, "Empty query");
-        return gradeService.getGradeOf(q);
+    public DataResponse<StudentGradeDTO> toGrade(@RequestBody ScoreQuery query) {
+        if (query == null || query.isNull()) return new DataResponse<>(null, "Empty query");
+        return gradeService.getGradeOf(query);
     }
 
     @RequestMapping("/loadStudents")
@@ -47,17 +44,18 @@ public class DisplayRestController {
 
     @RequestMapping("/student")
     @CrossOrigin
-    public DataResponse<StudentDTO> findStudent(@RequestBody StudentQuery studentQuery) {
-        if (studentQuery == null || studentQuery.isNull()) return null;
-        return studentService.getInfo(studentQuery.getStudentSerial(), studentQuery.getStudentName());
+    public DataResponse<StudentDTO> findStudent(String studentNumber, String studentName) {
+        StudentQuery query = new StudentQuery(studentName, studentNumber);
+        if (query == null || query.isNull()) return null;
+        return studentService.getInfo(query.getStudentSerial(), query.getStudentName());
     }
 
     @RequestMapping("/classInfo")
     @CrossOrigin
-    public DataResponse<ClassInfoDTO> findClassInfo(@RequestBody ClassQuery classQuery) {
-        if (classQuery == null || classQuery.isNull()) return new DataResponse<>(null, "Invalid Query");
+    public DataResponse<ClassInfoDTO> findClassInfo(@RequestBody ClassQuery query) {
+        if (query == null || query.isNull()) return new DataResponse<>(null, "Invalid Query");
         DataResponse<ClassInfoDTO> dataResponse = new DataResponse<>();
-        dataResponse.setData(classInfoService.getClassInfo(classQuery.getClassName(), classQuery.getClassSerial()));
+        dataResponse.setDataObject(classInfoService.getClassInfo(query.getClassName(), query.getClassSerial()));
         return dataResponse;
     }
 

@@ -14,7 +14,7 @@ public class StudentAssembler {
     public static StudentDTO create(List<Grade> gradeList, Student student, ClassInfo classInfo) {
         StudentDTO studentDTO = new StudentDTO();
         studentDTO.setSerial(student.getSerial());
-        studentDTO.setName(student.getName());
+        studentDTO.setStudentName(student.getName());
         studentDTO.setClassName(classInfo.getName());
         studentDTO.setAddress(student.getAddress());
         // Age = difference of D.O.B to now

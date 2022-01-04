@@ -1,43 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Student</title>
+  <meta charset="UTF-8">
+  <title>Students</title>
+  <script src="../static/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-  <table border="1">
-    <tr>
-      <td>编号</td><td th:text="${studentInfo.getSerial()}"></td>
-    </tr>
-    <tr>
-      <td>姓名</td><td th:text="${studentInfo.getName()}"></td>
-    </tr>
-    <tr>
-      <td><a th:href="@{/class(className=${studentInfo.className})}">班级</a></td><td th:text="${studentInfo.getClassName()}"></td>
-    </tr>
-    <tr>
-      <td>住址</td><td th:text="${studentInfo.getAddress()}"></td>
-    </tr>
-    <tr>
-      <td>年龄</td><td th:text="${studentInfo.getAge()}"></td>
-
-    </tr>
-  </table>
-  <table border="1">
-    <tr>
-      <td>语文</td>
-      <td>数学</td>
-      <td>英语</td>
-      <td>总成绩</td>
-      <td>平均成绩</td>
-    </tr>
-    <tr th:each="score : *{studentInfo.getScores()}">
-      <td th:text="${score.getLanguage()}"></td>
-      <td th:text="${score.getMath()}"></td>
-      <td th:text="${score.getEnglish()}"></td>
-      <td th:text="${score.getTotal()}"></td>
-      <td th:text="${score.getAverage()}"></td>
-    </tr>
-  </table>
+<form id="students">
+  student Number<input id="studentNumber" name="studentNumber"/><br>
+  student Name<input id="studentName" name="studentName"/><br>
+  <input id="btn_submit" type="button" value="查询学生基本信息和成绩"/>
+</form>
+<table border="1px">
+  <tr>
+    <td>student Number</td>
+    <td>student Name</td>
+    <td>student Address</td>
+    <td>student classes Number</td>
+    <td>student classes Name</td>
+    <td>student chinese</td>
+    <td>student math</td>
+    <td>student english</td>
+    <td>totalScore</td>
+    <td>avg Score</td>
+  </tr>
+  <tr>
+    <td id="tdStudentNumber"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>
 </body>
+<script>
+  $(document).ready(function () {
+    $("#btn_submit").click(function () {
+      let studentNumber = $('#studentNumber').val();
+      let studentName = $('#studentName').val();
+      let url = 'http://localhost:8888/display/student?studentNumber=' + studentNumber + '&studentName=' + studentName;
+      let result = $.ajax({
+        url: url, async: false
+      });
+      let response = JSON.parse(result.responseText);
+      alert(response.message);
+      $("#tdStudentNumber").html(response.dataObject.serial);
+    });
+  });
+
+</script>
 </html>
