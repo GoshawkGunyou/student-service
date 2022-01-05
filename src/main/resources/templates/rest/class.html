@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+    <script src="../../static/js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<form id="students">
+    Class Serial<input id="classSerial" name="classSerial"/><br>
+    Class Name<input id="className" name="className"/><br>
+    <input id="btn_submit" type="button" value="查询班级"/>
+</form>
+<table border="1px">
+    <tr>
+        <td>班级编码</td>
+        <td>班级名称</td>
+        <td>语文平均</td>
+        <td>数学平均</td>
+        <td>英语平均</td>
+        <td>总平均</td>
+    </tr>
+    <tr>
+        <td id="tdSerial"></td>
+        <td id="tdName"></td>
+        <td id="tdLanguageAvg"></td>
+        <td id="tdMathAvg"></td>
+        <td id="tdEnglishAvg"></td>
+        <td id="tdTotalAvg"></td>
+    </tr>
+</table>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#btn_submit").click(function () {
+            // let url = 'http://localhost:8888/display/student?studentName=' + studentName + '';
+            let url = 'http://localhost:8888/display/classInfo';
+            let result = $.ajax({
+                url: url,
+                async: false,
+                type: "POST",
+                processData: false,
+                data: JSON.stringify({"className": $('#className').val(), "classSerial": $('#classSerial').val()}),
+                contentType: "application/json",
+                dataType: "json",
+
+            });
+            let response = JSON.parse(result.responseText);
+            alert(response.message);
+            let dataObject = response.dataObject;
+            $("#tdSerial").html(dataObject.classSerial);
+            $("#tdName").html(dataObject.className);
+            $("#tdLanguageAvg").html(dataObject.languageAvg);
+            $("#tdMathAvg").html(dataObject.mathAvg);
+            $("#tdEnglishAvg").html(dataObject.englishAvg);
+            $("#tdTotalAvg").html(dataObject.totalAvg);
+
+
+        });
+    });
+
+</script>
+</html>

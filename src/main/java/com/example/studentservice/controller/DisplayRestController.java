@@ -44,10 +44,8 @@ public class DisplayRestController {
 
     @RequestMapping("/student")
     @CrossOrigin
-    public DataResponse<StudentDTO> findStudent(@RequestBody StudentQuery studentQuery) {
+    public DataResponse<StudentDTO> findStudent(@RequestBody StudentQuery query) {
 //        StudentQuery query = new StudentQuery(studentName, studentNumber);
-        System.out.println(studentQuery);
-        StudentQuery query = studentQuery;
         if (query == null || query.isNull()) return null;
         return studentService.getInfo(query.getStudentSerial(), query.getStudentName());
     }
@@ -56,9 +54,7 @@ public class DisplayRestController {
     @CrossOrigin
     public DataResponse<ClassInfoDTO> findClassInfo(@RequestBody ClassQuery query) {
         if (query == null || query.isNull()) return new DataResponse<>(null, "Invalid Query");
-        DataResponse<ClassInfoDTO> dataResponse = new DataResponse<>();
-        dataResponse.setDataObject(classInfoService.getClassInfo(query.getClassName(), query.getClassSerial()));
-        return dataResponse;
+        return classInfoService.getClassInfo(query.getClassName(), query.getClassSerial());
     }
 
 }

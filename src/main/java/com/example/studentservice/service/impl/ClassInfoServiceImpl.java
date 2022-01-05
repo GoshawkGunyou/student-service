@@ -6,6 +6,7 @@ import com.example.studentservice.domain.schoolclasses.ClassInfo;
 import com.example.studentservice.dto.ClassInfoDTO;
 import com.example.studentservice.mapper.ClassInfoMapper;
 import com.example.studentservice.mapper.GradeMapper;
+import com.example.studentservice.response.DataResponse;
 import com.example.studentservice.service.ClassInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,8 +69,9 @@ public class ClassInfoServiceImpl implements ClassInfoService {
     }
 
     @Override
-    public ClassInfoDTO getClassInfo(String className, String classSerial) {
-        ClassInfoDTO classInfoDTO = null;
+    public DataResponse<ClassInfoDTO> getClassInfo(String className, String classSerial) {
+        DataResponse<ClassInfoDTO> response = new DataResponse<>();
+        ClassInfoDTO classInfoDTO;
         ClassInfo classInfo = new ClassInfo();
         if (className != null)
             className = className.strip();
@@ -81,7 +83,11 @@ public class ClassInfoServiceImpl implements ClassInfoService {
         if (classInfo != null) {
             List<Grade> gradeList = gradeMapper.findAllByClassId(classInfo.getId());
             classInfoDTO = ClassInfoAssembler.create(gradeList, classInfo);
+            response.setMessage("Success");
+            response.setDataObject(classInfoDTO);;
+        } else {
+            response.setMessage("Class not found!");
         }
-        return classInfoDTO;
+        return response;
     }
 }

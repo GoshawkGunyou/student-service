@@ -19,8 +19,8 @@ public class ClassQuery {
     }
 
     private void clean() {
-        className = "".equals(className) || classSerial == null ? null : checkSerial(className.strip());
-        classSerial = "".equals(classSerial) || classSerial == null ? null : classSerial.strip();
+        className = "".equals(className) || classSerial == null ? null : className.strip();
+        classSerial = "".equals(classSerial) || classSerial == null ? null : checkSerial(classSerial.strip());
     }
 
     /**
