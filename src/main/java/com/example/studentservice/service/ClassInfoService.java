@@ -2,6 +2,7 @@ package com.example.studentservice.service;
 
 import com.example.studentservice.domain.schoolclasses.ClassInfo;
 import com.example.studentservice.dto.ClassInfoDTO;
+import com.example.studentservice.response.DataResponse;
 
 import java.util.List;
 
@@ -14,6 +15,6 @@ public interface ClassInfoService {
     List<ClassInfo> findClasses();
     ClassInfo findClass(String name, String serial);
 
-    ClassInfoDTO getClassInfo(String className, String classSerial);
+    DataResponse<ClassInfoDTO> getClassInfo(String className, String classSerial);
 
 }

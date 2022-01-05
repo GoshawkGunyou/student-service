@@ -12,8 +12,8 @@ public class StudentQuery {
     private String studentSerial;
 
     private void clean() {
-        this.strip();
-        this.trim();
+        studentName = "".equals(studentName) || studentName == null ? null : studentName.strip();
+        studentSerial = "".equals(studentSerial) || studentSerial == null ? null : checkSerial(studentSerial.strip());
     }
 
     public Boolean isNull() {
@@ -21,15 +21,20 @@ public class StudentQuery {
         return studentName == null && studentSerial == null;
     }
 
-    private void trim() {
-        studentName = "".equals(studentName) ? null : studentName;
-        studentSerial = "".equals(studentSerial) ? null : studentSerial;
-    }
-
-    private void strip() {
-        if (studentName != null)
-            studentName = studentName.strip();
-        if (studentSerial != null)
-            studentSerial = studentSerial.strip();
+    /**
+     * Checks if serial is valid. A valid serial either begins with SN- and is length of 16 or is 13 characters long and
+     * can be split into 3 parts.
+     * Does not check for valid alphanum combination, only matching size.
+     * @param serial potential serial to check
+     * @return serial without SN- or serial itself if valid. Null if serial does not meet requirements.
+     */
+    private String checkSerial(String serial) {
+        if (serial.length() == 16 && "SN-".equals(serial.substring(0, 3))) {
+            return serial.substring(3);
+        }
+        if (serial.length() == 13 && serial.split("-").length == 3) {
+            return serial;
+        }
+        return null;
     }
 }

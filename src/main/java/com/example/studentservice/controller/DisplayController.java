@@ -48,7 +48,7 @@ public class DisplayController {
 
     @RequestMapping("/query/student")
     public String toStudentQuery() {
-        return "studentQuery";
+        return "student";
     }
 
     @RequestMapping("/student/grade")

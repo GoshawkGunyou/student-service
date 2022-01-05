@@ -59,7 +59,7 @@ public class GradeServiceImpl implements GradeService {
         }
         Grade grade = gradeMapper.findByStudentSerialAndName(student);
         if (grade != null) {
-            response.setData(GradeAssembler.create(grade, scoreQuery.getMin(), scoreQuery.getMax()));
+            response.setDataObject(GradeAssembler.create(grade, scoreQuery.getMin(), scoreQuery.getMax()));
             response.setMessage("Success");
         }
         return response;

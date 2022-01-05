@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Students</title>
+  <script src="../../static/js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<form id="students">
+  student Number<input id="studentNumber" name="studentNumber"/><br>
+  student Name<input id="studentName" name="studentName"/><br>
+  <input id="btn_submit" type="button" value="查询学生基本信息和成绩"/>
+</form>
+<table border="1px">
+  <tr>
+    <td>student Number</td>
+    <td>student Name</td>
+    <td>student Address</td>
+    <td>student classes Number</td>
+    <td>student classes Name</td>
+    <td>student chinese</td>
+    <td>student math</td>
+    <td>student english</td>
+    <td>totalScore</td>
+    <td>avg Score</td>
+  </tr>
+  <tr>
+    <td id="tdStudentNumber"></td>
+    <td id="tdStudentName"></td>
+    <td id="tdStudentAddress"></td>
+    <td id="tdAge"></td>
+    <td id="tdClassName"></td>
+    <td id="tdChinese"></td>
+    <td id="tdMath"></td>
+    <td id="tdEnglish"></td>
+    <td id="tdTotalScore"></td>
+    <td id="tdAvgScore"></td>
+  </tr>
+</table>
+</div>
+</body>
+<script>
+  $(document).ready(function () {
+    $("#btn_submit").click(function () {
+      // let url = 'http://localhost:8888/display/student?studentName=' + studentName + '';
+      let url = 'http://localhost:8888/display/student';
+      let result = $.ajax({
+        url: url,
+        async: false,
+        type: "POST",
+        processData: false,
+        data: JSON.stringify({"studentName": $('#studentName').val(), "studentSerial": $('#studentNumber').val()}),
+        contentType: "application/json",
+        dataType: "json",
+
+      });
+      let response = JSON.parse(result.responseText);
+      alert(response.message);
+      let dataObject = response.dataObject;
+      $("#tdStudentNumber").html(dataObject.serial);
+      $("#tdStudentName").html(dataObject.studentName);
+      $("#tdClassName").html(dataObject.className);
+      $("#tdStudentAddress").html(dataObject.address);
+      $("#tdAge").html(dataObject.age);
+      let score = dataObject.scores[0];
+      $("#tdChinese").html(score.language);
+      $("#tdMath").html(score.math);
+      $("#tdEnglish").html(score.english);
+      $("#tdTotalScore").html(score.total);
+      $("#tdAvgScore").html(score.average);
+
+
+    });
+  });
+
+</script>
+</html>
