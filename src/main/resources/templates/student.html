@@ -26,15 +26,15 @@
   </tr>
   <tr>
     <td id="tdStudentNumber"></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td id="tdStudentName"></td>
+    <td id="tdStudentAddress"></td>
+    <td id="tdAge"></td>
+    <td id="tdClassName"></td>
+    <td id="tdChinese"></td>
+    <td id="tdMath"></td>
+    <td id="tdEnglish"></td>
+    <td id="tdTotalScore"></td>
+    <td id="tdAvgScore"></td>
   </tr>
 </table>
 </div>
@@ -42,15 +42,34 @@
 <script>
   $(document).ready(function () {
     $("#btn_submit").click(function () {
-      let studentNumber = $('#studentNumber').val();
-      let studentName = $('#studentName').val();
-      let url = 'http://localhost:8888/display/student?studentNumber=' + studentNumber + '&studentName=' + studentName;
+      // let url = 'http://localhost:8888/display/student?studentName=' + studentName + '';
+      let url = 'http://localhost:8888/display/student';
       let result = $.ajax({
-        url: url, async: false
+        url: url,
+        async: false,
+        type: "POST",
+        processData: false,
+        data: JSON.stringify({"studentName": $('#studentName').val(), "studentSerial": $('#studentNumber').val()}),
+        contentType: "application/json",
+        dataType: "json",
+
       });
       let response = JSON.parse(result.responseText);
       alert(response.message);
-      $("#tdStudentNumber").html(response.dataObject.serial);
+      let dataObject = response.dataObject;
+      $("#tdStudentNumber").html(dataObject.serial);
+      $("#tdStudentName").html(dataObject.studentName);
+      $("#tdClassName").html(dataObject.className);
+      $("#tdStudentAddress").html(dataObject.address);
+      $("#tdAge").html(dataObject.age);
+      let score = dataObject.scores[0];
+      $("#tdChinese").html(score.language);
+      $("#tdMath").html(score.math);
+      $("#tdEnglish").html(score.english);
+      $("#tdTotalScore").html(score.total);
+      $("#tdAvgScore").html(score.average);
+
+
     });
   });
 
