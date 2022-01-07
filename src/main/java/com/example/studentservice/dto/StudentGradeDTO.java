@@ -1,5 +1,6 @@
 package com.example.studentservice.dto;
 
+import com.example.studentservice.domain.ClassType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,4 +17,5 @@ public class StudentGradeDTO {
     private String studentName;
     private String className;
     private List<ClassScoreDTO> gradeDTOs;
+    private ClassType[] classTypes = ClassType.values();
 }

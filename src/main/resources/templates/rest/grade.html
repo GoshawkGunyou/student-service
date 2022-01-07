@@ -70,8 +70,9 @@ Max<input id="max" name="max"/><br>
       let scores = dataObject.gradeDTOs;
       $("#gradeTable").empty().html('<tr id="trCount"></tr>')
       $("#trCount").html('<td/><td>Avg</td>')
-      for (let i = 0; i < 3; i++) {
-        var classType = scores[i].classType;
+      let classTypes = dataObject.classTypes;
+      for (let i = 0; i < classTypes.length; i++) {
+        var classType = classTypes[i];
         jQuery('<tr id="' + classType + '"></tr>');
         $('"#' + classType + '"').html('<td>' + classType + '</td>');
       }
