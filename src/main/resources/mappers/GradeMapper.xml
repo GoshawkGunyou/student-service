@@ -59,7 +59,19 @@
         </association>
     </resultMap>
 
+    <select id="findAllByClassId" parameterType="int" resultMap="gradeResult">
+        SELECT g_id, g_language, g_math, g_english, g_status, g_creator, g_creation_time, g_last_editor, g_last_time
+        FROM grades g inner join students s on g.s_id = s.s_id
+        WHERE s.c_id = #{classId};
+    </select>
 
+
+    <select id="findByStudentId" parameterType="int" resultMap="gradeResult">
+        SELECT g_id, g_language, g_math, g_english, g_status, g_creator, g_creation_time, g_last_editor, g_last_time
+        FROM grades WHERE s_id = #{id};
+    </select>
+
+<!--    Deprecated -->
     <select id="findAll" resultMap="gradeResultWithStudent">
         SELECT *
         FROM grades g left outer join
@@ -70,12 +82,8 @@
              on g.s_id = sc.s_id;
     </select>
 
-    <select id="findAllByClassId" parameterType="int" resultMap="gradeResult">
-        SELECT g_id, g_language, g_math, g_english, g_status, g_creator, g_creation_time, g_last_editor, g_last_time
-        FROM grades g inner join students s on g.s_id = s.s_id
-        WHERE s.c_id = #{classId};
-    </select>
 
+<!-- Deprecated -->
     <select id="findAllByClassInfo" parameterType="ClassInfo" resultMap="gradeResultWithStudent">
         SELECT *
         FROM grades g left outer join
@@ -95,11 +103,8 @@
         </trim>;
     </select>
 
-    <select id="findByStudentId" parameterType="int" resultMap="gradeResult">
-       SELECT g_id, g_language, g_math, g_english, g_status, g_creator, g_creation_time, g_last_editor, g_last_time
-       FROM grades WHERE s_id = #{id};
-    </select>
 
+<!--Deprecated-->
     <select id="findByStudentSerialAndName" parameterType="Student" resultMap="gradeResultWithStudent">
         SELECT g.s_id, AVG(g_math) as g_math, AVG(g_english) as g_english, AVG(g_language) as g_language, s_serial, s_name, s_sex, s_dob, s_address, s_phone, s_creator, s_creation_time, s_last_editor, s_last_time, c_id, c_serial, c_name, c_status, c_creator, c_creation_time, c_last_editor, c_last_time
         FROM grades g left outer join

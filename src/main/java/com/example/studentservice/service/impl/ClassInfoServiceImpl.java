@@ -60,6 +60,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
      * @return ClassInfo if exists in database, otherwise null.
      */
     @Override
+    @Deprecated
     public ClassInfo findClass(String name, String serial) {
         if (name == null && serial == null) return null;
         ClassInfo classInfo = new ClassInfo();
@@ -68,26 +69,24 @@ public class ClassInfoServiceImpl implements ClassInfoService {
         return classInfoMapper.findBy(classInfo);
     }
 
+    /**
+     * Finds a class with grade information from className or classSerial (Or both).
+     * @param className name of class
+     * @param classSerial serial number of class, in non CL- form
+     * @return completely filled DataResponse object with ClassInfoDTO stored in dataObject field.
+     * If class is not found returns a DataResponse with a null dataObject and error message.
+     */
     @Override
     public DataResponse<ClassInfoDTO> getClassInfo(String className, String classSerial) {
-        DataResponse<ClassInfoDTO> response = new DataResponse<>();
         ClassInfoDTO classInfoDTO;
-        ClassInfo classInfo = new ClassInfo();
-        if (className != null)
-            className = className.strip();
-        if (classSerial != null)
-            classSerial = classSerial.strip();
-        classInfo.setSerial(classSerial);
-        classInfo.setName(className);
+        ClassInfo classInfo = new ClassInfo(null, className, classSerial, null);
         classInfo = classInfoMapper.findBy(classInfo);
         if (classInfo != null) {
             List<Grade> gradeList = gradeMapper.findAllByClassId(classInfo.getId());
             classInfoDTO = ClassInfoAssembler.create(gradeList, classInfo);
-            response.setMessage("Success");
-            response.setDataObject(classInfoDTO);;
+            return new DataResponse<>(classInfoDTO, "Success");
         } else {
-            response.setMessage("Class not found!");
+            return new DataResponse<>(null, "Class not found!");
         }
-        return response;
     }
 }

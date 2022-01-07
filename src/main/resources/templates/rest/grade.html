@@ -19,11 +19,7 @@ Max<input id="max" name="max"/><br>
   <span>StudentName: </span>
   <span id="tdStudentName"></span>
 </div>
-<table border="1px">
-  <tr id="trCount"></tr>
-  <tr id="LANGUAGE"></tr>
-  <tr id="ENGLISH"></tr>
-  <tr id="MATH"></tr>
+<table id="gradeTable" border="1px">
 </table>
 </body>
 <script>
@@ -51,39 +47,40 @@ Max<input id="max" name="max"/><br>
         jQuery('<option value="' + student.serial + '" id="' + student.id + '">' + student.serial + ' : ' + student.name + '</option>').appendTo("#students");
       }
     });
+
     $("#btn_submit").click(function () {
-      let url = 'http://localhost:8888/display/grade';
       let result = $.ajax({
-        url: url,
+        url: 'http://localhost:8888/display/grade',
         async: false,
         type: "POST",
         processData: false,
-        data: JSON.stringify({"studentSerial": $("#students").find("option:selected").val(), "min": $('#min').val(), "max":$('#max').val()}),
+        data: JSON.stringify({
+          "studentSerial": $("#students").find("option:selected").val(),
+          "min": $('#min').val(),
+          "max":$('#max').val()
+        }),
         contentType: "application/json",
         dataType: "json",
       });
       let response = JSON.parse(result.responseText);
       alert(response.message);
-      $("#trCount").html('<td/>')
-      $("#LANGUAGE").html('<td>Chinese</td>');
-      $("#MATH").html('<td>Math</td>');
-      $("#ENGLISH").html('<td>English</td>');
+
       let dataObject = response.dataObject;
       $("#tdStudentName").html(dataObject.studentName);
       let scores = dataObject.gradeDTOs;
-      let count = 0;
-      for (let i = 0; i < scores.length; i++) {
-        if (i % 3 === 0) {
-          jQuery('<td>' + (count++) + '</td>').appendTo("#trCount");
-        }
-        switch (scores[i].grade) {
-          case null:
-            jQuery('<td></td>').appendTo("#" + scores[i].classType);
-            break;
-          default:
-            jQuery('<td>' + scores[i].grade + '</td>').appendTo('#' + scores[i].classType);
-            break;
-        }
+      $("#gradeTable").empty().html('<tr id="trCount"></tr>')
+      $("#trCount").html('<td/><td>Avg</td>')
+      for (let i = 0; i < 3; i++) {
+        var classType = scores[i].classType;
+        jQuery('<tr id="' + classType + '"></tr>');
+        $('"#' + classType + '"').html('<td>' + classType + '</td>');
+      }
+
+      for (let i = 0, count = 1; i < scores.length; i++) {
+        // if (i % 3 === 0) {
+        //   jQuery('<td>' + (count++) + '</td>').appendTo("#trCount");
+        // }
+        jQuery('<td>' + (scores[i].grade == null ? "" : scores[i].grade) + '</td>').appendTo('#' + scores[i].classType);
       }
     });
   });
