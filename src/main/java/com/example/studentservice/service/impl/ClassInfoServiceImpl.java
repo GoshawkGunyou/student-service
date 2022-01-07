@@ -49,8 +49,8 @@ public class ClassInfoServiceImpl implements ClassInfoService {
     }
 
     @Override
-    public List<ClassInfo> findClasses() {
-        return classInfoMapper.findAll();
+    public DataResponse<List<ClassInfo>> findClasses() {
+        return new DataResponse<>(classInfoMapper.findAll(), "success");
     }
 
     /**

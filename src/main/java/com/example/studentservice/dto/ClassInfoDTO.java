@@ -13,6 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class ClassInfoDTO {
+    private Integer classId;
     private String classSerial;
     private String className;
     private Double languageAvg;
@@ -21,6 +22,7 @@ public class ClassInfoDTO {
     private Double totalAvg;
 
     public void setClassInfo (ClassInfo classInfo) {
+        this.classId = classInfo.getId();
         setClassName(classInfo.getName());
         setClassSerial(classInfo.getSerial());
     }

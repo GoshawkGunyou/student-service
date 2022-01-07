@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Students</title>
+  <script src="../../static/js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<select id="classes">
+</select>
+<select id="students">
+</select>
+Min<input id="min" name="min"/><br>
+Max<input id="max" name="max"/><br>
+<input id="btn_submit" type="button" value="成绩结果"/>
+<br>
+<div>
+  <span>StudentName: </span>
+  <span id="tdStudentName"></span>
+</div>
+<table border="1px">
+  <tr id="trCount"></tr>
+  <tr id="LANGUAGE"></tr>
+  <tr id="ENGLISH"></tr>
+  <tr id="MATH"></tr>
+</table>
+</body>
+<script>
+  $(document).ready(function () {
+    let classResponse = $.ajax({
+      url: 'http://localhost:8888/display/allClass',
+      async: false
+    });
+    let classResp = JSON.parse(classResponse.responseText);
+    let classArr = classResp.dataObject;
+    for (let i = 0; i < classArr.length; i++) {
+      jQuery('<option value="' + classArr[i].id + '">CL-' + classArr[i].serial + '</option>').appendTo("#classes");
+    }
+
+    $("#classes").change(function () {
+      $("#students").empty();
+      let studentResponse = $.ajax({
+        url: 'http://localhost:8888/display/loadStudents?classId=' + $("#classes").find("option:selected").val(),
+        async: false,
+      });
+      let response = JSON.parse(studentResponse.responseText);
+      let students = response.dataObject;
+      for (var i = 0; i < students.length; i++) {
+        var student = students[i]
+        jQuery('<option value="' + student.serial + '" id="' + student.id + '">' + student.serial + ' : ' + student.name + '</option>').appendTo("#students");
+      }
+    });
+    $("#btn_submit").click(function () {
+      let url = 'http://localhost:8888/display/grade';
+      let result = $.ajax({
+        url: url,
+        async: false,
+        type: "POST",
+        processData: false,
+        data: JSON.stringify({"studentSerial": $("#students").find("option:selected").val(), "min": $('#min').val(), "max":$('#max').val()}),
+        contentType: "application/json",
+        dataType: "json",
+      });
+      let response = JSON.parse(result.responseText);
+      alert(response.message);
+      $("#trCount").html('<td/>')
+      $("#LANGUAGE").html('<td>Chinese</td>');
+      $("#MATH").html('<td>Math</td>');
+      $("#ENGLISH").html('<td>English</td>');
+      let dataObject = response.dataObject;
+      $("#tdStudentName").html(dataObject.studentName);
+      let scores = dataObject.gradeDTOs;
+      let count = 0;
+      for (let i = 0; i < scores.length; i++) {
+        if (i % 3 === 0) {
+          jQuery('<td>' + (count++) + '</td>').appendTo("#trCount");
+        }
+        switch (scores[i].grade) {
+          case null:
+            jQuery('<td></td>').appendTo("#" + scores[i].classType);
+            break;
+          default:
+            jQuery('<td>' + scores[i].grade + '</td>').appendTo('#' + scores[i].classType);
+            break;
+        }
+      }
+    });
+  });
+
+</script>
+</html>

@@ -12,7 +12,7 @@ public interface ClassInfoService {
     Boolean update(Integer id, ClassInfo classInfo);
     Boolean update(ClassInfo classInfo);
 
-    List<ClassInfo> findClasses();
+    DataResponse<List<ClassInfo>> findClasses();
     ClassInfo findClass(String name, String serial);
 
     DataResponse<ClassInfoDTO> getClassInfo(String className, String classSerial);

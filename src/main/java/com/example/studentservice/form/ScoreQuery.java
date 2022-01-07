@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ScoreQuery {
-    private String studentName;
+    private String studentSerial;
     private Double min;
     private Double max;
 
@@ -16,7 +16,7 @@ public class ScoreQuery {
      */
     public Boolean isNull() {
         clean();
-        return (studentName == null);
+        return (studentSerial == null);
     }
 
     public void clean() {
@@ -24,7 +24,7 @@ public class ScoreQuery {
         // lower and upper bounds
         min = min == null || min < 0 ? 0 : min;
         max = max == null || max > 100 ? 100 : max;
-        studentName = studentName == null ? null : studentName.strip();
+        studentSerial = studentSerial == null ? null : studentSerial.strip();
     }
 
     /**

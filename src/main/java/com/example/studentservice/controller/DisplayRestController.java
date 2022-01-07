@@ -1,5 +1,6 @@
 package com.example.studentservice.controller;
 
+import com.example.studentservice.domain.schoolclasses.ClassInfo;
 import com.example.studentservice.domain.student.Student;
 import com.example.studentservice.dto.ClassInfoDTO;
 import com.example.studentservice.dto.StudentDTO;
@@ -37,7 +38,7 @@ public class DisplayRestController {
 
     @RequestMapping("/loadStudents")
     @CrossOrigin
-    public DataResponse<List<Student>> students(@RequestBody Integer classId) {
+    public DataResponse<List<Student>> students(Integer classId) {
         if (classId == null) return new DataResponse<>(null, "Invalid query");
         return studentService.findInClass(classId);
     }
@@ -55,6 +56,12 @@ public class DisplayRestController {
     public DataResponse<ClassInfoDTO> findClassInfo(@RequestBody ClassQuery query) {
         if (query == null || query.isNull()) return new DataResponse<>(null, "Invalid Query");
         return classInfoService.getClassInfo(query.getClassName(), query.getClassSerial());
+    }
+
+    @RequestMapping("/allClass")
+    @CrossOrigin
+    public DataResponse<List<ClassInfo>> findAll() {
+        return classInfoService.findClasses();
     }
 
 }

@@ -49,9 +49,9 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public DataResponse<StudentGradeDTO> getGradeOf(ScoreQuery scoreQuery) {
-        DataResponse<StudentGradeDTO> response = new DataResponse();
+        DataResponse<StudentGradeDTO> response = new DataResponse<>();
         Student student = new Student();
-        student.setName(scoreQuery.getStudentName());
+        student.setSerial(scoreQuery.getStudentSerial());
         student = studentMapper.findByStudent(student);
         if (student == null) {
             response.setMessage("Student not found");
